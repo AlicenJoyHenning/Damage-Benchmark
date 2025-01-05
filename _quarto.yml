@@ -9,19 +9,22 @@ website:
       - href: index.qmd
         text: Home
       - projects.qmd
+      - results.qmd
+      - contribute.qmd
     tools:
-      - icon: twitter
-        href: https://twitter.com/
       - icon: github
-        href: https://github.com/AlicenJoyHenning/Damage-Benchmark
+        menu:
+          - text: Source Code
+            href:  https://github.com/AlicenJoyHenning/Damage-Benchmark
+          - text: Report a Bug
+            href:  https://github.com/AlicenJoyHenning/Damage-Benchmark/issues
+
   page-footer:
     right: "Built with [Quarto](https://quarto.org/)"
-    left: "&copy; Copyright 2025, Alicen Henning"
 
 format:
   html:
-    theme: litera
-    toc: true
+    theme: minty
 
 editor: source
 

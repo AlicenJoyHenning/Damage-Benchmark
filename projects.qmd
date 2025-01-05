@@ -1,9 +1,70 @@
 ---
-title: "Projects"
+title: "Data"
 ---
 
-## Project 1
+All data used in the analysis is publicly available at the links provided below. 
 
-## Project 2
+#### Ground truth data | 2 datasets, 5 damaged samples (*)
 
-## Project 3
+|   | Dataset           | Treatment                          | Sorting                           | Sample      | Accession | Download |
+|---|-------------------|------------------------------------|-----------------------------------|-------------|-----------|----------|
+| | | | | | |||
+| * | HEK293 cell line  | Staurosporine (1 μM, 2 hours)      | Annexin V<sup>+</sup> and DAPI<sup>+</sup> | Apoptotic   | PRJEB33078         | [ENA, BAM files](http://ftp.sra.ebi.ac.uk/vol1/run/ERR337/ERR3379692/apoptotic_genome.bam)       |
+| * | HEK293 cell line  | Staurosporine (1 μM, 2 hours)      | Annexin V<sup>+</sup> and DAPI<sup>-</sup> | Pro-apoptotic | PRJEB33078         | [ENA, BAM files](http://ftp.sra.ebi.ac.uk/vol1/run/ERR337/ERR3379695/proapoptotic_genome.bam)     |
+|   | HEK293 cell line  | -                                  | Annexin V<sup>-</sup> and DAPI<sup>-</sup> | Control     | PRJEB33078         | [ENA, BAM files](http://ftp.sra.ebi.ac.uk/vol1/run/ERR337/ERR3379693/healthy_genome.bam)       |
+| | | | | | |||
+| * | GM18507 cell line | TNF-alpha (100 ng/ml, 24 hours)    | Propidium iodide<sup>+</sup> and Annexin V<sup>+</sup>  | Dead        | EGAS00001003753         | [Zenodo, TENX049_SA928_003_sceset_v3_raw.rds](https://zenodo.org/records/3407791)      |
+| * | GM18507 cell line | TNF-alpha (100 ng/ml, 24 hours)    | Propidium iodide<sup>-</sup> and Annexin V<sup>+</sup>  | Dying       | EGAS00001003753         | [Zenodo, TENX049_SA928_002_sceset_v3_raw.rds](https://zenodo.org/records/3407791)     |
+|   | GM18507 cell line | -                                  | Propidium iodide<sup>-</sup> and Annexin V<sup>-</sup> | Control     | EGAS00001003753         | [Zenodo, TENX049_SA928_001_sceset_v3_raw.rds](https://zenodo.org/records/3407791)       |
+| | | | | | |||
+| * | PDX               | TNF-alpha (100 ng/ml, 24 hours)    | Propidium iodide<sup>+</sup> and Annexin V<sup>+</sup>  | Dead        | EGAS00001003753         | [Zenodo, TENX019_SA604X7XB02089_004_sceset_v3_raw.rds](https://zenodo.org/records/3407791)       |
+|   | PDX               | -    | Propidium iodide<sup>-</sup> and Annexin V<sup>-</sup>  | Control       | EGAS00001003753         | [Zenodo, TENX019_SA604X7XB02089_002_sceset_v3_raw.rds](https://zenodo.org/records/3407791)       |
+
+
+
+#### Non-ground truth data    |    15 datasets, 15 samples
+
+| Dataset |  Tissue Type | Accession | Download | Data type | Protocol |
+|:--------|:--------|:--------|:--------|:--------|:--------|
+| _Healthy Human tissue extracts_ | | | | | | 
+| 4K PBMC (10x Genomics 2017)                            | PBMC               | GSE108444 | [Link](https://s3-us-west-2.amazonaws.com/10x.files/samples/cell-exp/2.1.0/pbmc4k/pbmc4k_fastqs.tar)                                                                                                          | FASTQ        | 10x v2, normal         |
+| Healthy Human Lung (Habermann, 2020)                   | Lung               | GSE135893 | [Link1](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR998/002/SRR9985352/SRR9985352_1.fastq.gz), [Link2](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR998/002/SRR9985352/SRR9985352_2.fastq.gz)                              | FASTQ        | 10x v2, extra length   |
+| Liver atlas (MacParland, 2018)                         | Liver              | GSE115469 | [Link](http://ftp.sra.ebi.ac.uk/vol1/run/SRR727/SRR7276474/bam/P1TLH.bam)                                                                                                                                      | BAM to FASTQ | 10x v2, normal         |
+| | | | | |
+| _Diseased Human tissue extracts_ | | | | |
+| TB PBMC (Cai, 2020)                                    | PBMC                | PRJNA605083 | [Link1](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR110/091/SRR11038991/SRR11038991_1.fastq.gz), [Link2](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR110/091/SRR11038991/SRR11038991_2.fastq.gz)                          | FASTQ        | 10x v2, normal         |
+| TB Lung (Wang, 2023)                                   | Lung                | GSE192483 | [Link1](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR217/019/SRR21771719/SRR21771719_1.fastq.gz), [Link2](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR217/019/SRR21771719/SRR21771719_2.fastq.gz)                          | FASTQ        | 10x v2, extra length   |
+| HBV Liver (Beudeker, 2024)                             | Liver               | GSE247322 | [Link](https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR26730867/SRR26730867)                                                                                                                                   | SRA to FASTQ | 10x v3                 |
+| | | | | |
+| _Mouse tissue extracts_ | | | | |
+| 10K Mouse PBMC (10X Genomics, 2021)                    | PBMC                 | [10X Genomics](https://www.10xgenomics.com/datasets/10-k-mouse-pbm-cs-multiplexed-2-cm-os-3-1-standard-6-0-0) | [Link](https://s3-us-west-2.amazonaws.com/10x.files/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_Mouse_PBMC_10K_Multiplex/SC3_v3_NextGem_DI_CellPlex_Mouse_PBMC_10K_Multiplex_fastqs.tar)               | FASTQ        | 10x v3                 |
+| Mouse lung (Li, 2021)                                  | Lung                 | [10X Genomics](https://www.ncbi.nlm.nih.gov/sra/?term=SRR16190628) | [Link1](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR161/028/SRR16190628/SRR16190628_1.fastq.gz), [Link2](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR161/028/SRR16190628/SRR16190628_2.fastq.gz)                          | FASTQ        | 10x v3                 |
+| Liver necroposis (Vucur, 2023)                         | Liver                | GSE166875 | [Link1](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/006/SRR13724006/SRR13724006_1.fastq.gz), [Link2](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/006/SRR13724006/SRR13724006_2.fastq.gz)                          | FASTQ        | 10x v2, normal         |
+| | | | | |
+| _Human tumours_ | | | | |
+| Human Hodgkin's Lymphoma (10x Genomics 2020b)          | Lymphoid tissue      | [10X Genomics](https://www.10xgenomics.com/datasets/hodgkins-lymphoma-dissociated-tumor-targeted-immunology-panel-3-1-standard-4-0-0) | [Link](https://s3-us-west-2.amazonaws.com/10x.files/samples/cell-exp/4.0.0/Parent_NGSC3_DI_HodgkinsLymphoma/Parent_NGSC3_DI_HodgkinsLymphoma_fastqs.tar)                                                     | FASTQ        | 10x v3                 |
+| Human Glioblastoma (10x Genomics 2020)                 | Glioblastoma         | [10X Genomics](https://www.10xgenomics.com/datasets/human-glioblastoma-multiforme-3-v-3-whole-transcriptome-analysis-3-standard-4-0-0) | [Link](https://cf.10xgenomics.com/samples/cell-exp/4.0.0/Parent_SC3v3_Human_Glioblastoma/Parent_SC3v3_Human_Glioblastoma_fastqs.tar)                                                                         | FASTQ        | 10x v3                 |
+| Human Ductal Carcinoma (10x Genomics 2021)             | Breast cancer tissue | [10X Genomics](https://www.10xgenomics.com/datasets/7-5-k-sorted-cells-from-human-invasive-ductal-carcinoma-3-v-3-1-3-1-standard-6-0-0)  | [Link](https://s3-us-west-2.amazonaws.com/10x.files/samples/cell-exp/6.0.0/Breast_Cancer_3p/Breast_Cancer_3p_fastqs.tar)                                                                                     | FASTQ        | 10x v3                 |
+| | | | | |
+| _Human cell lines_ | | | | |
+| 5k A549, Lung Carcinoma Cells (10X Genomics 2021)      | -                    | GSE161363 | [Link](https://s3-us-west-2.amazonaws.com/10x.files/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CRISPR_A549_5K_Multiplex/SC3_v3_NextGem_DI_CRISPR_A549_5K_Multiplex_fastqs.tar)                                 | FASTQ        | 10x v3                 |
+| Raji and Jurkat Cells (10X Genomics, 2021)             | -                    | [10X Genomics](https://www.10xgenomics.com/datasets/10-k-1-1-mixture-of-raji-and-jurkat-cells-multiplexed-2-cm-os-3-1-standard-6-0-0) | [Link](https://s3-us-west-2.amazonaws.com/10x.files/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_Jurkat_Raji_10K_Multiplex/SC3_v3_NextGem_DI_CellPlex_Jurkat_Raji_10K_Multiplex_fastqs.tar)             | FASTQ        | 10x v3                 |
+| HCT-116 (Meir, 2016)                                   | -                    | GSE144357 | [Link1](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR109/069/SRR10974769/SRR10974769_1.fastq.gz), [Link2](http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR109/069/SRR10974769/SRR10974769_2.fastq.gz)                          | FASTQ        | 10x v2, normal         |
+
+
+### **Simulated data** 
+_1 parent dataset, 30 final samples_
+
+All simulated samples were created from a dataset available in ```R``` through the ```SeuratData``` package. The interferon-treated PBMC dataset was selected as it contains case and control data already intergrated into a single object with cell annotations. 
+
+```R
+# IFNB-Stimulated & Control PBMC data
+library(SeuratData)
+InstallData("ifnb")
+data("ifnb")
+ifnb <- UpdateSeuratObject(ifnb)
+```
+
+These foundational simulated samples were altered by randomly extracting a fixed percentage of their cells (2.5, 5, 10, 15, or 20), passing them through a damage-pertubration function, and reintroducing them to the sample. The resulting datasets are available for download on ```Zenodo```, [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14048075.svg)](https://doi.org/10.5281/zenodo.14048075).
+
+<br>

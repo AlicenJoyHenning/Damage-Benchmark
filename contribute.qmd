@@ -1,0 +1,7 @@
+---
+title: "Contribute"
+---
+
+The results of our benchmark (Damage Bench, [link](http:here)) offer a static view of the current landscape of damaged cell detection. As new strategies emerge, and new ground truth datasets become available, we intend for them to be added to our benchmarking framework. 
+
+If you can offer a novel strategy, metric to benchmarking the strategies, or dataset, please think of contributing. 

@@ -1,23 +1,58 @@
 [
   {
-    "objectID": "projects.html#project-2",
-    "href": "projects.html#project-2",
-    "title": "Projects",
-    "section": "Project 2",
-    "text": "Project 2"
-  },
-  {
-    "objectID": "projects.html#project-3",
-    "href": "projects.html#project-3",
-    "title": "Projects",
-    "section": "Project 3",
-    "text": "Project 3"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "About Me",
+    "title": "Overview",
     "section": "",
-    "text": "Thanks for checking out my web site!"
+    "text": "Filtering cells that have lost transcriptomic information during isolation protocols, referred to here as “damaged cells”, is a fundamental quality control task for single cell RNA sequencing (scRNA-seq) data analysis. However, unlike other aspects of cell quality control, such as doublet and empty droplet removal, how to best filter damaged cells from single cell data has not been thoroughly explored.\nSearching online tutorials, forums, and published articles will bring you to the same conclusion: filter cells that express a high proportion of mitochondrial genes. This is because damaged cells are understood to have impaired membranes where cytoplasmic RNA content has escaped. It is for the same reason that the number of unique transcripts and UMIs per cell are also recommended metrics for identifying damaged cells.\nMore recently, the proportion of unspliced RNA, targeting transcripts that remain intact in the nucleus in the event of damage, and ribosomal RNA, targeting those that do not, are offered as damaged cell quality control metrics. Extending from this, the expression of the nuclear-located long non-coding RNA, MALAT1, has also been suggested as a potential metric for identifying damaged cells.\nThe problem for a user then arises in two forms: 1. Which cell quality controls metrics should I use and 2. According to what outlier detection framework should I perform filtering\nDamaged cell detection tools provide their own solutions to the problems. However, the relative effectiveness of these tools, and of manual methods, is yet to be systematically determined. Our goal with this benchmark is to provide an objective answer to the question of how to best filter damaged cells in single cell data. Providing users with information on the characteristics of each available strategy, we aim for comprehensive, robust action towards addressing this quality control task."
+  },
+  {
+    "objectID": "index.html#benchmark-motivation",
+    "href": "index.html#benchmark-motivation",
+    "title": "Overview",
+    "section": "",
+    "text": "Filtering cells that have lost transcriptomic information during isolation protocols, referred to here as “damaged cells”, is a fundamental quality control task for single cell RNA sequencing (scRNA-seq) data analysis. However, unlike other aspects of cell quality control, such as doublet and empty droplet removal, how to best filter damaged cells from single cell data has not been thoroughly explored.\nSearching online tutorials, forums, and published articles will bring you to the same conclusion: filter cells that express a high proportion of mitochondrial genes. This is because damaged cells are understood to have impaired membranes where cytoplasmic RNA content has escaped. It is for the same reason that the number of unique transcripts and UMIs per cell are also recommended metrics for identifying damaged cells.\nMore recently, the proportion of unspliced RNA, targeting transcripts that remain intact in the nucleus in the event of damage, and ribosomal RNA, targeting those that do not, are offered as damaged cell quality control metrics. Extending from this, the expression of the nuclear-located long non-coding RNA, MALAT1, has also been suggested as a potential metric for identifying damaged cells.\nThe problem for a user then arises in two forms: 1. Which cell quality controls metrics should I use and 2. According to what outlier detection framework should I perform filtering\nDamaged cell detection tools provide their own solutions to the problems. However, the relative effectiveness of these tools, and of manual methods, is yet to be systematically determined. Our goal with this benchmark is to provide an objective answer to the question of how to best filter damaged cells in single cell data. Providing users with information on the characteristics of each available strategy, we aim for comprehensive, robust action towards addressing this quality control task."
+  },
+  {
+    "objectID": "index.html#structure-of-benchmark",
+    "href": "index.html#structure-of-benchmark",
+    "title": "Overview",
+    "section": "Structure of benchmark",
+    "text": "Structure of benchmark"
+  },
+  {
+    "objectID": "index.html#webpage-tour",
+    "href": "index.html#webpage-tour",
+    "title": "Overview",
+    "section": "Webpage tour",
+    "text": "Webpage tour\nThis\nBut searching for true damaged droplets in a sample-specific manner is tedious and not always intuitive, leading to user-defined filtering that lacks reproducibility.\nThe analysis is made up of four components beginning with a search for manual and tool-based strategies for damaged cell filtering, A. To test the strategies, data was collected and processed, B, for testing and comparison, C. An overview of the results are condensed, D, into sections for the user, containing usage recommendations, and the developers, containing areas for improvement. \n\n\n\nAlt text"
+  },
+  {
+    "objectID": "results.html",
+    "href": "results.html",
+    "title": "Results",
+    "section": "",
+    "text": "Explore the current consensus results below. To change the preferred ranking system, select an option from the Rank button. If you wish to change the strategies viewed, select an option from the View button."
+  },
+  {
+    "objectID": "results.html#damaged-cell-detection-strategies",
+    "href": "results.html#damaged-cell-detection-strategies",
+    "title": "Results",
+    "section": "Damaged Cell Detection Strategies",
+    "text": "Damaged Cell Detection Strategies\nlibrary(DT)"
+  },
+  {
+    "objectID": "contribute.html",
+    "href": "contribute.html",
+    "title": "Contribute",
+    "section": "",
+    "text": "The results of our benchmark (Damage Bench, link) offer a static view of the current landscape of damaged cell detection. As new strategies emerge, and new ground truth datasets become available, we intend for them to be added to our benchmarking framework.\nIf you can offer a novel strategy, metric to benchmarking the strategies, or dataset, please think of contributing."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Data",
+    "section": "",
+    "text": "All data used in the analysis is publicly available at the links provided below.\n\nGround truth data | 2 datasets, 5 damaged samples (*)\n\n\n\n\nDataset\nTreatment\nSorting\nSample\nAccession\nDownload\n\n\n\n\n\n\n\n\n\n\n\n\n\n*\nHEK293 cell line\nStaurosporine (1 μM, 2 hours)\nAnnexin V+ and DAPI+\nApoptotic\nPRJEB33078\nENA, BAM files\n\n\n*\nHEK293 cell line\nStaurosporine (1 μM, 2 hours)\nAnnexin V+ and DAPI-\nPro-apoptotic\nPRJEB33078\nENA, BAM files\n\n\n\nHEK293 cell line\n-\nAnnexin V- and DAPI-\nControl\nPRJEB33078\nENA, BAM files\n\n\n\n\n\n\n\n\n\n\n\n*\nGM18507 cell line\nTNF-alpha (100 ng/ml, 24 hours)\nPropidium iodide+ and Annexin V+\nDead\nEGAS00001003753\nZenodo, TENX049_SA928_003_sceset_v3_raw.rds\n\n\n*\nGM18507 cell line\nTNF-alpha (100 ng/ml, 24 hours)\nPropidium iodide- and Annexin V+\nDying\nEGAS00001003753\nZenodo, TENX049_SA928_002_sceset_v3_raw.rds\n\n\n\nGM18507 cell line\n-\nPropidium iodide- and Annexin V-\nControl\nEGAS00001003753\nZenodo, TENX049_SA928_001_sceset_v3_raw.rds\n\n\n\n\n\n\n\n\n\n\n\n*\nPDX\nTNF-alpha (100 ng/ml, 24 hours)\nPropidium iodide+ and Annexin V+\nDead\nEGAS00001003753\nZenodo, TENX019_SA604X7XB02089_004_sceset_v3_raw.rds\n\n\n\nPDX\n-\nPropidium iodide- and Annexin V-\nControl\nEGAS00001003753\nZenodo, TENX019_SA604X7XB02089_002_sceset_v3_raw.rds\n\n\n\n\n\nNon-ground truth data | 15 datasets, 15 samples\n\n\n\nDataset\nTissue Type\nAccession\nDownload\nData type\nProtocol\n\n\n\n\nHealthy Human tissue extracts\n\n\n\n\n\n\n\n4K PBMC (10x Genomics 2017)\nPBMC\nGSE108444\nLink\nFASTQ\n10x v2, normal\n\n\nHealthy Human Lung (Habermann, 2020)\nLung\nGSE135893\nLink1, Link2\nFASTQ\n10x v2, extra length\n\n\nLiver atlas (MacParland, 2018)\nLiver\nGSE115469\nLink\nBAM to FASTQ\n10x v2, normal\n\n\n\n\n\n\n\n\n\n\nDiseased Human tissue extracts\n\n\n\n\n\n\n\nTB PBMC (Cai, 2020)\nPBMC\nPRJNA605083\nLink1, Link2\nFASTQ\n10x v2, normal\n\n\nTB Lung (Wang, 2023)\nLung\nGSE192483\nLink1, Link2\nFASTQ\n10x v2, extra length\n\n\nHBV Liver (Beudeker, 2024)\nLiver\nGSE247322\nLink\nSRA to FASTQ\n10x v3\n\n\n\n\n\n\n\n\n\n\nMouse tissue extracts\n\n\n\n\n\n\n\n10K Mouse PBMC (10X Genomics, 2021)\nPBMC\n10X Genomics\nLink\nFASTQ\n10x v3\n\n\nMouse lung (Li, 2021)\nLung\n10X Genomics\nLink1, Link2\nFASTQ\n10x v3\n\n\nLiver necroposis (Vucur, 2023)\nLiver\nGSE166875\nLink1, Link2\nFASTQ\n10x v2, normal\n\n\n\n\n\n\n\n\n\n\nHuman tumours\n\n\n\n\n\n\n\nHuman Hodgkin’s Lymphoma (10x Genomics 2020b)\nLymphoid tissue\n10X Genomics\nLink\nFASTQ\n10x v3\n\n\nHuman Glioblastoma (10x Genomics 2020)\nGlioblastoma\n10X Genomics\nLink\nFASTQ\n10x v3\n\n\nHuman Ductal Carcinoma (10x Genomics 2021)\nBreast cancer tissue\n10X Genomics\nLink\nFASTQ\n10x v3\n\n\n\n\n\n\n\n\n\n\nHuman cell lines\n\n\n\n\n\n\n\n5k A549, Lung Carcinoma Cells (10X Genomics 2021)\n-\nGSE161363\nLink\nFASTQ\n10x v3\n\n\nRaji and Jurkat Cells (10X Genomics, 2021)\n-\n10X Genomics\nLink\nFASTQ\n10x v3\n\n\nHCT-116 (Meir, 2016)\n-\nGSE144357\nLink1, Link2\nFASTQ\n10x v2, normal\n\n\n\n\n\nSimulated data\n1 parent dataset, 30 final samples\nAll simulated samples were created from a dataset available in R through the SeuratData package. The interferon-treated PBMC dataset was selected as it contains case and control data already intergrated into a single object with cell annotations.\n# IFNB-Stimulated & Control PBMC data\nlibrary(SeuratData)\nInstallData(\"ifnb\")\ndata(\"ifnb\")\nifnb &lt;- UpdateSeuratObject(ifnb)\nThese foundational simulated samples were altered by randomly extracting a fixed percentage of their cells (2.5, 5, 10, 15, or 20), passing them through a damage-pertubration function, and reintroducing them to the sample. The resulting datasets are available for download on Zenodo, ."
   }
 ]

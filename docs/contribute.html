@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Damage Benchmark - Overview</title>
+<title>Damage Benchmark - Contribute</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -100,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Results</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contribute.html"> 
+    <a class="nav-link active" href="./contribute.html" aria-current="page"> 
 <span class="menu-text">Contribute</span></a>
   </li>  
 </ul>
@@ -128,27 +128,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul class="collapse">
-  <li><a href="#benchmark-motivation" id="toc-benchmark-motivation" class="nav-link active" data-scroll-target="#benchmark-motivation">Benchmark motivation</a></li>
-  <li><a href="#structure-of-benchmark" id="toc-structure-of-benchmark" class="nav-link" data-scroll-target="#structure-of-benchmark">Structure of benchmark</a></li>
-  <li><a href="#webpage-tour" id="toc-webpage-tour" class="nav-link" data-scroll-target="#webpage-tour">Webpage tour</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Overview</h1>
+<h1 class="title">Contribute</h1>
 </div>
 
 
@@ -165,32 +152,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="benchmark-motivation" class="level2">
-<h2 class="anchored" data-anchor-id="benchmark-motivation">Benchmark motivation</h2>
-<p>Filtering cells that have lost transcriptomic information during isolation protocols, referred to here as “damaged cells”, is a fundamental quality control task for single cell RNA sequencing (scRNA-seq) data analysis. However, unlike other aspects of cell quality control, such as doublet and empty droplet removal, how to best filter damaged cells from single cell data has not been thoroughly explored.</p>
-<p>Searching online tutorials, forums, and published articles will bring you to the same conclusion: filter cells that express a high proportion of mitochondrial genes. This is because damaged cells are understood to have impaired membranes where cytoplasmic RNA content has escaped. It is for the same reason that the number of unique transcripts and UMIs per cell are also recommended metrics for identifying damaged cells.</p>
-<p>More recently, the proportion of unspliced RNA, targeting transcripts that remain intact in the nucleus in the event of damage, and ribosomal RNA, targeting those that do not, are offered as damaged cell quality control metrics. Extending from this, the expression of the nuclear-located long non-coding RNA, MALAT1, has also been suggested as a potential metric for identifying damaged cells.</p>
-<p>The problem for a user then arises in two forms:<br> 1. Which cell quality controls metrics should I use and<br> 2. According to what outlier detection framework should I perform filtering</p>
-<p>Damaged cell detection tools provide their own solutions to the problems. However, the relative effectiveness of these tools, and of manual methods, is yet to be systematically determined. Our goal with this benchmark is to provide an objective answer to the question of how to best filter damaged cells in single cell data. Providing users with information on the characteristics of each available strategy, we aim for comprehensive, robust action towards addressing this quality control task.</p>
-</section>
-<section id="structure-of-benchmark" class="level2">
-<h2 class="anchored" data-anchor-id="structure-of-benchmark">Structure of benchmark</h2>
-</section>
-<section id="webpage-tour" class="level2">
-<h2 class="anchored" data-anchor-id="webpage-tour">Webpage tour</h2>
-<p>This</p>
-<p>But searching for true damaged droplets in a sample-specific manner is tedious and not always intuitive, leading to user-defined filtering that lacks reproducibility.</p>
-<p>The analysis is made up of four components beginning with a search for manual and tool-based strategies for damaged cell filtering, A. To test the strategies, data was collected and processed, B, for testing and comparison, C. An overview of the results are condensed, D, into sections for the user, containing usage recommendations, and the developers, containing areas for improvement. <br></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://github.com/AlicenJoyHenning/DamageToolReviewArticle/blob/main/images/study_workflow.png" class="img-fluid figure-img"></p>
-<figcaption>Alt text</figcaption>
-</figure>
-</div>
-<p><br></p>
+<p>The results of our benchmark (Damage Bench, <a href="http:here">link</a>) offer a static view of the current landscape of damaged cell detection. As new strategies emerge, and new ground truth datasets become available, we intend for them to be added to our benchmarking framework.</p>
+<p>If you can offer a novel strategy, metric to benchmarking the strategies, or dataset, please think of contributing.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

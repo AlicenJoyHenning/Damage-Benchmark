@@ -1,0 +1,26 @@
+---
+title: "Results"
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Explore the current consensus results below. To change the preferred
+ranking system, select an option from the `Rank` button. If you wish to
+change the strategies viewed, select an option from the `View` button.
+
+## Damaged Cell Detection Strategies
+
+\`\`\`{r, echo=FALSE, results='asis'} library(DT)
+
+# Data for the table
+
+data \<- read.csv("./data/final-results.csv", sep = ";")
+
+# Create an interactive table and return it
+
+print( datatable( data, options = list( paging = FALSE, lengthChange =
+FALSE, dom = 'Bfrtip', buttons = c('colvis', 'csv', 'excel'), columnDefs
+= list( list(targets = "\_all", width = "150px") ) ), extensions =
+'Buttons' ) )
