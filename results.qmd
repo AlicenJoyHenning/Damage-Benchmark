@@ -8,21 +8,22 @@ editor:
     wrap: 72
 ---
 
-Explore the current consensus results below. To change the preferred
-ranking system, select an option from the `Rank` button. If you wish to
-change the strategies viewed, select an option from the `View` button.
+Explore the current consensus results below. The order of the strategies can be changed by clicking the arrows positioned by the column header of a metric, such as performance. 
+
+For less cluttered viewing, select the columns you wish to see using the **Column visibility** button. 
 
 ## Damaged Cell Detection Strategies
 
 ```{r, echo=FALSE}
-# Interactive results table
-library(DT)
 
-# Results in csv format
-data <- read.csv("./data/final-results.csv", sep = ";")
+# Load necessary libraries
+library(DT)
+library(dplyr)
+
+# Read the results CSV file directly from GitHub
+data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/consensus-results.csv", sep = ";")
 
 # Return the table
-
 datatable(
   data,
   options = list(
@@ -31,12 +32,31 @@ datatable(
     dom = 'Bfrtip',
     buttons = c('colvis', 'csv', 'excel'),
     columnDefs = list(
-      list(targets = "_all", width = "150px")
+      list(targets = 0, visible = FALSE),              # Hide the first column (index column)
+      list(targets = c(2, 3, 4), visible = FALSE),     # Hides the "meta data" columns
+      list(targets = "_all", width = "300px")
+    ),
+    headerCallback = JS(
+      "function(thead, data, start, end, display) {",
+      "  var usabilityHeader = $(thead).find('th').eq(8);",  # Index of 'Usability' column (adjust if necessary)
+      "  usabilityHeader.css('cursor', 'pointer');",         # Change cursor to indicate it's clickable
+      "  usabilityHeader.on('click', function() {",
+      "    alert('The Usability column shows the score out of 15 based on the evaluation criteria.');",  # Replace with modal logic if needed
+      "  });",
+      "}"
     )
   ),
   colnames = c("Outlier detection" = "Outlier.detection",
                "Damage focus" = "Damage.focus"),
   extensions = 'Buttons'
-)
+) %>%
+  formatRound(
+    columns = c("Performance", "Damage focus", "Stringency", "Consistency", "Usability"), 
+    digits = 2
+  )
+
+
 
 ```
+
+

@@ -10,7 +10,7 @@ toc-depth: 6
 ### Tool-based strategies 
 
 #### 1. ddqc
-**Article**: [https://doi.org/10.1186/s13059-021-02547-0](https://doi.org/10.1186/s13059-021-02547-0)
+**Article**: [https://doi.org/10.1186/s13059-022-02820-w](https://doi.org/10.1186/s13059-022-02820-w)
 
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ayshwaryas/ddqc) [![GitHub stars](https://img.shields.io/github/stars/ayshwaryas/ddqc?style=social)](https://github.com/ayshwaryas/ddqc) ![Last Commit](https://img.shields.io/github/last-commit/ayshwaryas/ddqc)
 
@@ -20,7 +20,7 @@ Identifies damaged cells within sample-specific clusters using the Louvain algor
 
 
 #### 2. DropletQC
-**Article**: [https://doi.org/10.1186/s13059-022-02820-w](https://doi.org/10.1186/s13059-022-02820-w)
+**Article**: [https://doi.org/10.1186/s13059-021-02547-0](https://doi.org/10.1186/s13059-021-02547-0)
 
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/powellgenomicslab/DropletQC) [![GitHub stars](https://img.shields.io/github/stars/powellgenomicslab/DropletQC?style=social)](https://github.com/powellgenomicslab/DropletQC) ![Last Commit](https://img.shields.io/github/last-commit/powellgenomicslab/DropletQC)
 
@@ -74,6 +74,7 @@ Provides diagnostic visualizations and filtering functions to assess and remove 
 
 Detects apoptotic cells using scaled and transformed QC features with logistic regression and cross-validation for soft labeling.
 
+*******
 
 ### Manual strategies 
 
@@ -102,57 +103,95 @@ data = data[data.obs.pct_counts_mt < 10, :]
 <br>
 
 #### Adaptive thresholding 
-Involves setting thresholds based on the distribution of a metric/the metrics in a given dataset. For this analysis, we used the simple outlier detection method of percentiles. For metrics where an upper threshold was needed, it was set according to the 90th percentile, this included  mitochondrial percent expression and MALAT1 percent expression. For metrics where a lower threshold was needed, it was set according to the 10th percentile, this included ribosaml percent expression and library size. 
-Note that library size refers to the log10 transformed UMI and feature counts. 
+Thresholds set based on the dataset's distribution of a certain metric using a simple percentile-based method. Upper thresholds (e.g., for mitochondrial and MALAT1 percent expression) were set at the 90th percentile, while lower thresholds (e.g., for ribosomal percent expression and library size) were set at the 10th percentile.
+Note: library size refers to an equally weighted consideration of the log10 transformed UMI and feature counts. 
 
 ##### 9. Mitochondrial percent expression 
-Filtering cells with mitochondrial percent expression above the 90th percentile. 
+Filtering cells with 
+
+- mitochondrial percent expression above the 90th percentile. 
 
 ##### 10. Mitochondrial & ribosomal percent expression 
-Filtering cells with mitochondrial percent expression above the 90th percentile AND with ribosomal percent expression below the 10th percentile.
+Filtering cells with 
+
+- mitochondrial percent expression above the 90th percentile AND 
+- with ribosomal percent expression below the 10th percentile.
 
 ##### 11. Mitochondrial, ribosomal percent expression & library size 
-Filtering cells with mitochondrial percent expression above the 90th percentile, ribosomal percent expression below the 10th percentile AND library size below the 10th percentile. 
+Filtering cells with 
+
+- mitochondrial percent expression above the 90th percentile, 
+- ribosomal percent expression below the 10th percentile AND 
+- library size below the 10th percentile. 
 
 ##### 12. Library size 
-Filtering cells with library sizes below the 10th percentile.
+Filtering cells with 
+
+- library sizes below the 10th percentile.
 
 ##### 13. MALAT1 percent expression 
-Filtering cells with MALAT1 percent expression above the 90th percentile. 
+Filtering cells with 
+
+- MALAT1 percent expression above the 90th percentile. 
 
 ##### 14. MALAT1 & mitochondrial percent expression 
-Filtering cells with MALAT1 percent expression above the 90th percentile AND mitochondriak percent expression above the 90th percentile. 
+Filtering cells with 
 
+- MALAT1 percent expression above the 90th percentile AND 
+- mitochondrial percent expression above the 90th percentile. 
+
+<br>
+<br>
 
 *******
 
 ## Metrics
 
 ### Performance metrics 
-The true damaged cell labels from ground truth datasets were compared to the predicted damaged cell labels of each strategy. 
 
-#### Precision-Recall Curve (PR-AUC)
+$$
+\text{Performance} = \text{Precision} + \text{PR-AUC} + \text{Jaccard Index} + \text{F1 Score}
+$$
 
+where, 
 
-#### Precision 
+- **Precision**  \left( 0, 1 \right) : Of all damaged predictions made, what proportion were true damaged cells?  
+  _Median score taken from the 5 experimentally verified ground truth datasets._
 
+- **PR-AUC**  \left( 0, 1 \right) : Of all predictions, were damaged cells correctly and comprehensively identified (i.e., were true damaged cells missed)?  
+  _Median score taken from the 5 experimentally verified ground truth datasets._
 
-#### Similarity (Jaccard Index) to damage-free highly variable gene (HVG) set 
+- **Jaccard Index**  \left( 0, 1 \right) : How similar were the filtered datasets to the positive, damage-free control (closer to the control indicates better correction for damage)?  
+  _Median score taken from the 30 simulated ground truth datasets._
 
+- **F1 Score**  \left( 0, 1 \right) : Were the differentially expressed genes of the filtered datasets correct compared to the positive, damage-free control?  
+  _Median score taken from the 30 simulated ground truth datasets._
 
-#### Correctness (F1 Score) of differentially expressed genes (DEG) identified  
+Thus, **Performance** lies in the range  \left( 0, 4 \right) , with 4 being the highest performance possible.
 
+You can view the individual performance scores for the strategies, [here](). 
 
 *******
 
 ### Performance agnostic metrics
 #### Damage focus 
+This measures how many of the damaged predictions originate from the population of damaged cells that have a significantly altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth datasets, is a proportion and lies in the range  \left( 0, 1 \right) where we pose that closer to 1 is ideal.
+
+<br>
+
 
 #### Stringency 
+This score measures how many of the cells present were labelled as damaged by the strategy. While this proportion is not especially valuable when viewed in an isolated dataset, collecting it across many datasets, here 51, gives a good idea of how stringent the strategy is in general and how a user can expect it to be when applied to new data. This is offered in response to one of the most prominent concerns for damaged cell filtering strategies: that they will remove too many cells (too stringent), or won't remove enough (too lenient). Being a proportion, this score ranges from \left( 0, 1 \right) where closer to 1 represents more stringent strategies.
+
+<br>
 
 #### Consistency 
 
+<br>
+
 #### Usability 
+
+<br>
 
 *******
 

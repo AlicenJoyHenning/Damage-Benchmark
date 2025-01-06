@@ -101,6 +101,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -202,13 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#metrics" id="toc-metrics" class="nav-link" data-scroll-target="#metrics">Metrics</a>
   <ul>
-  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics">Performance metrics</a>
-  <ul>
-  <li><a href="#precision-recall-curve-pr-auc" id="toc-precision-recall-curve-pr-auc" class="nav-link" data-scroll-target="#precision-recall-curve-pr-auc">Precision-Recall Curve (PR-AUC)</a></li>
-  <li><a href="#precision" id="toc-precision" class="nav-link" data-scroll-target="#precision">Precision</a></li>
-  <li><a href="#similarity-jaccard-index-to-damage-free-highly-variable-gene-hvg-set" id="toc-similarity-jaccard-index-to-damage-free-highly-variable-gene-hvg-set" class="nav-link" data-scroll-target="#similarity-jaccard-index-to-damage-free-highly-variable-gene-hvg-set">Similarity (Jaccard Index) to damage-free highly variable gene (HVG) set</a></li>
-  <li><a href="#correctness-f1-score-of-differentially-expressed-genes-deg-identified" id="toc-correctness-f1-score-of-differentially-expressed-genes-deg-identified" class="nav-link" data-scroll-target="#correctness-f1-score-of-differentially-expressed-genes-deg-identified">Correctness (F1 Score) of differentially expressed genes (DEG) identified</a></li>
-  </ul></li>
+  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics">Performance metrics</a></li>
   <li><a href="#performance-agnostic-metrics" id="toc-performance-agnostic-metrics" class="nav-link" data-scroll-target="#performance-agnostic-metrics">Performance agnostic metrics</a>
   <ul>
   <li><a href="#damage-focus" id="toc-damage-focus" class="nav-link" data-scroll-target="#damage-focus">Damage focus</a></li>
@@ -252,14 +275,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="tool-based-strategies">Tool-based strategies</h3>
 <section id="ddqc" class="level4">
 <h4 class="anchored" data-anchor-id="ddqc">1. ddqc</h4>
-<p><strong>Article</strong>: <a href="https://doi.org/10.1186/s13059-021-02547-0">https://doi.org/10.1186/s13059-021-02547-0</a></p>
+<p><strong>Article</strong>: <a href="https://doi.org/10.1186/s13059-022-02820-w">https://doi.org/10.1186/s13059-022-02820-w</a></p>
 <p><a href="https://github.com/ayshwaryas/ddqc"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&amp;logo=github&amp;logoColor=white" class="img-fluid" alt="GitHub"></a> <a href="https://github.com/ayshwaryas/ddqc"><img src="https://img.shields.io/github/stars/ayshwaryas/ddqc?style=social.png" class="img-fluid" alt="GitHub stars"></a> <img src="https://img.shields.io/github/last-commit/ayshwaryas/ddqc.png" class="img-fluid" alt="Last Commit"></p>
 <p>Identifies damaged cells within sample-specific clusters using the Louvain algorithm for clustering and MAD-based univariate outlier detection of UMI, feature counts, and mitochondrial or ribosomal percentages.</p>
 <p><a href="https://github.com/ayshwaryas/ddqc/blob/master/tutorials/ddqc_tutorial.ipynb">Tutorial</a></p>
 </section>
 <section id="dropletqc" class="level4">
 <h4 class="anchored" data-anchor-id="dropletqc">2. DropletQC</h4>
-<p><strong>Article</strong>: <a href="https://doi.org/10.1186/s13059-022-02820-w">https://doi.org/10.1186/s13059-022-02820-w</a></p>
+<p><strong>Article</strong>: <a href="https://doi.org/10.1186/s13059-021-02547-0">https://doi.org/10.1186/s13059-021-02547-0</a></p>
 <p><a href="https://github.com/powellgenomicslab/DropletQC"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&amp;logo=github&amp;logoColor=white" class="img-fluid" alt="GitHub"></a> <a href="https://github.com/powellgenomicslab/DropletQC"><img src="https://img.shields.io/github/stars/powellgenomicslab/DropletQC?style=social.png" class="img-fluid" alt="GitHub stars"></a> <img src="https://img.shields.io/github/last-commit/powellgenomicslab/DropletQC.png" class="img-fluid" alt="Last Commit"></p>
 <p>Uses nuclear fraction (ratio of unspliced to spliced transcripts) and UMI counts with an Expectation-Maximization model to classify damaged cells.</p>
 <p><a href="https://powellgenomicslab.github.io/DropletQC/articles/DropletQC.html#identifying-damaged-cells-1">Tutorial</a></p>
@@ -297,6 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://github.com/madsen-lab/valiDrops"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&amp;logo=github&amp;logoColor=white" class="img-fluid" alt="GitHub"></a><br>
 <a href="https://github.com/madsen-lab/valiDrops"><img src="https://img.shields.io/github/stars/madsen-lab/valiDrops?style=social.png" class="img-fluid" alt="GitHub stars"></a> <img src="https://img.shields.io/github/last-commit/madsen-lab/valiDrops.png" class="img-fluid" alt="Last Commit"></p>
 <p>Detects apoptotic cells using scaled and transformed QC features with logistic regression and cross-validation for soft labeling.</p>
+<hr>
 </section>
 </section>
 <section id="manual-strategies" class="level3">
@@ -305,7 +329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="fixed-thresholding">Fixed thresholding</h4>
 <section id="mitochondrial-percent-expression" class="level5">
 <h5 class="anchored" data-anchor-id="mitochondrial-percent-expression">8. Mitochondrial percent expression</h5>
-<p>This involves setting a fixed value for mitochondrial percent expression above which cells are classified as damaged. Implementation of this method varies based on preferred platform, for example using default functions in the <a href="https://satijalab.org/seurat/"><code>Seurat</code></a> R package,</p>
+<p>Involves setting a fixed value for mitochondrial percent expression above which cells are classified as damaged. Implementation of this method varies based on preferred platform, for example using default functions in the <a href="https://satijalab.org/seurat/"><code>Seurat</code></a> R package,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data[[<span class="st">"percent.mt"</span>]] <span class="ot">&lt;-</span> <span class="fu">PercentageFeatureSet</span>(data, <span class="at">pattern =</span> <span class="st">"^MT-"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">subset</span>(data, <span class="at">subset =</span> percent.mt <span class="sc">&lt;</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -316,27 +340,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sc.pp.calculate_qc_metrics(data, qc_vars<span class="op">=</span>[<span class="st">'mt'</span>], percent_top<span class="op">=</span><span class="va">None</span>, log1p<span class="op">=</span><span class="va">False</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data[data.obs.pct_counts_mt <span class="op">&lt;</span> <span class="dv">10</span>, :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br></p>
 </section>
 </section>
 <section id="adaptive-thresholding" class="level4">
 <h4 class="anchored" data-anchor-id="adaptive-thresholding">Adaptive thresholding</h4>
+<p>Thresholds set based on the dataset’s distribution of a certain metric using a simple percentile-based method. Upper thresholds (e.g., for mitochondrial and MALAT1 percent expression) were set at the 90th percentile, while lower thresholds (e.g., for ribosomal percent expression and library size) were set at the 10th percentile. Note: library size refers to an equally weighted consideration of the log10 transformed UMI and feature counts.</p>
 <section id="mitochondrial-percent-expression-1" class="level5">
 <h5 class="anchored" data-anchor-id="mitochondrial-percent-expression-1">9. Mitochondrial percent expression</h5>
+<p>Filtering cells with</p>
+<ul>
+<li>mitochondrial percent expression above the 90th percentile.</li>
+</ul>
 </section>
 <section id="mitochondrial-ribosomal-percent-expression" class="level5">
 <h5 class="anchored" data-anchor-id="mitochondrial-ribosomal-percent-expression">10. Mitochondrial &amp; ribosomal percent expression</h5>
+<p>Filtering cells with</p>
+<ul>
+<li>mitochondrial percent expression above the 90th percentile AND</li>
+<li>with ribosomal percent expression below the 10th percentile.</li>
+</ul>
 </section>
 <section id="mitochondrial-ribosomal-percent-expression-library-size" class="level5">
 <h5 class="anchored" data-anchor-id="mitochondrial-ribosomal-percent-expression-library-size">11. Mitochondrial, ribosomal percent expression &amp; library size</h5>
+<p>Filtering cells with</p>
+<ul>
+<li>mitochondrial percent expression above the 90th percentile,</li>
+<li>ribosomal percent expression below the 10th percentile AND</li>
+<li>library size below the 10th percentile.</li>
+</ul>
 </section>
 <section id="library-size" class="level5">
 <h5 class="anchored" data-anchor-id="library-size">12. Library size</h5>
+<p>Filtering cells with</p>
+<ul>
+<li>library sizes below the 10th percentile.</li>
+</ul>
 </section>
 <section id="malat1-percent-expression" class="level5">
 <h5 class="anchored" data-anchor-id="malat1-percent-expression">13. MALAT1 percent expression</h5>
+<p>Filtering cells with</p>
+<ul>
+<li>MALAT1 percent expression above the 90th percentile.</li>
+</ul>
 </section>
 <section id="malat1-mitochondrial-percent-expression" class="level5">
 <h5 class="anchored" data-anchor-id="malat1-mitochondrial-percent-expression">14. MALAT1 &amp; mitochondrial percent expression</h5>
+<p>Filtering cells with</p>
+<ul>
+<li>MALAT1 percent expression above the 90th percentile AND</li>
+<li>mitochondrial percent expression above the 90th percentile.</li>
+</ul>
+<p><br> <br></p>
 <hr>
 </section>
 </section>
@@ -346,33 +401,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="metrics">Metrics</h2>
 <section id="performance-metrics" class="level3">
 <h3 class="anchored" data-anchor-id="performance-metrics">Performance metrics</h3>
-<section id="precision-recall-curve-pr-auc" class="level4">
-<h4 class="anchored" data-anchor-id="precision-recall-curve-pr-auc">Precision-Recall Curve (PR-AUC)</h4>
-</section>
-<section id="precision" class="level4">
-<h4 class="anchored" data-anchor-id="precision">Precision</h4>
-</section>
-<section id="similarity-jaccard-index-to-damage-free-highly-variable-gene-hvg-set" class="level4">
-<h4 class="anchored" data-anchor-id="similarity-jaccard-index-to-damage-free-highly-variable-gene-hvg-set">Similarity (Jaccard Index) to damage-free highly variable gene (HVG) set</h4>
-</section>
-<section id="correctness-f1-score-of-differentially-expressed-genes-deg-identified" class="level4">
-<h4 class="anchored" data-anchor-id="correctness-f1-score-of-differentially-expressed-genes-deg-identified">Correctness (F1 Score) of differentially expressed genes (DEG) identified</h4>
+<p><span class="math display">\[
+\text{Performance} = \text{Precision} + \text{PR-AUC} + \text{Jaccard Index} + \text{F1 Score}
+\]</span></p>
+<p>where,</p>
+<ul>
+<li><p><strong>Precision</strong> ( 0, 1 ) : Of all damaged predictions made, what proportion were true damaged cells?<br>
+<em>Median score taken from the 5 experimentally verified ground truth datasets.</em></p></li>
+<li><p><strong>PR-AUC</strong> ( 0, 1 ) : Of all predictions, were damaged cells correctly and comprehensively identified (i.e., were true damaged cells missed)?<br>
+<em>Median score taken from the 5 experimentally verified ground truth datasets.</em></p></li>
+<li><p><strong>Jaccard Index</strong> ( 0, 1 ) : How similar were the filtered datasets to the positive, damage-free control (closer to the control indicates better correction for damage)?<br>
+<em>Median score taken from the 30 simulated ground truth datasets.</em></p></li>
+<li><p><strong>F1 Score</strong> ( 0, 1 ) : Were the differentially expressed genes of the filtered datasets correct compared to the positive, damage-free control?<br>
+<em>Median score taken from the 30 simulated ground truth datasets.</em></p></li>
+</ul>
+<p>Thus, <strong>Performance</strong> lies in the range ( 0, 4 ) , with 4 being the highest performance possible.</p>
+<p>You can view the individual performance scores for the strategies, <a href="">here</a>.</p>
 <hr>
-</section>
 </section>
 <section id="performance-agnostic-metrics" class="level3">
 <h3 class="anchored" data-anchor-id="performance-agnostic-metrics">Performance agnostic metrics</h3>
 <section id="damage-focus" class="level4">
 <h4 class="anchored" data-anchor-id="damage-focus">Damage focus</h4>
+<p>This measures how many of the damaged predictions originate from the population of damaged cells that have a significantly altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth dataset, is a proportion and lies in the range ( 0, 1 ) where we pose that closer to 1 is ideal.</p>
+<p><br></p>
 </section>
 <section id="stringency" class="level4">
 <h4 class="anchored" data-anchor-id="stringency">Stringency</h4>
+<p>This score measures how many of the cells present were labelled as damaged by the strategy. While this proportion is not especially valuable when viewed in an isolated dataset, collecting it across many datasets, here 51, gives a good idea of how stringent the strategy is in general and how a user can expect it to be when applied to new data. This is offered in response to one of the most prominent concerns for damaged cell filtering strategies: that they will remove too many cells (too stringent), or won’t remove enough (too lenient). Being a proportion, this score ranges from ( 0, 1 ) where closer to 1 represents more stringent strategies.</p>
+<p><br></p>
 </section>
 <section id="consistency" class="level4">
 <h4 class="anchored" data-anchor-id="consistency">Consistency</h4>
+<p><br></p>
 </section>
 <section id="usability" class="level4">
 <h4 class="anchored" data-anchor-id="usability">Usability</h4>
+<p><br></p>
 <hr>
 <p>To add a new metric or suggest an adjustment to the above metrics, please visit the <a href="contribute.html">Contribute</a> page.</p>
 <hr>
