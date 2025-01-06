@@ -1,6 +1,8 @@
 ---
 title: "Results"
-format: html
+format: 
+  html:
+    page-layout: full
 editor: 
   markdown: 
     wrap: 72
@@ -12,15 +14,29 @@ change the strategies viewed, select an option from the `View` button.
 
 ## Damaged Cell Detection Strategies
 
-\`\`\`{r, echo=FALSE, results='asis'} library(DT)
+```{r, echo=FALSE}
+# Interactive results table
+library(DT)
 
-# Data for the table
+# Results in csv format
+data <- read.csv("./data/final-results.csv", sep = ";")
 
-data \<- read.csv("./data/final-results.csv", sep = ";")
+# Return the table
 
-# Create an interactive table and return it
+datatable(
+  data,
+  options = list(
+    paging = FALSE,
+    lengthChange = FALSE,
+    dom = 'Bfrtip',
+    buttons = c('colvis', 'csv', 'excel'),
+    columnDefs = list(
+      list(targets = "_all", width = "150px")
+    )
+  ),
+  colnames = c("Outlier detection" = "Outlier.detection",
+               "Damage focus" = "Damage.focus"),
+  extensions = 'Buttons'
+)
 
-print( datatable( data, options = list( paging = FALSE, lengthChange =
-FALSE, dom = 'Bfrtip', buttons = c('colvis', 'csv', 'excel'), columnDefs
-= list( list(targets = "\_all", width = "150px") ) ), extensions =
-'Buttons' ) )
+```

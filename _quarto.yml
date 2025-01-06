@@ -8,7 +8,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - projects.qmd
+      - data.qmd
+      - benchmark.qmd
       - results.qmd
       - contribute.qmd
     tools:
@@ -27,4 +28,9 @@ format:
     theme: minty
 
 editor: source
+
+execute:
+  echo: true
+  warning: false
+  error: true
 

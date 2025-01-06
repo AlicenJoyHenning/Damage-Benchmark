@@ -1,0 +1,161 @@
+---
+title: "Benchmark"
+toc: true
+toc-location: left
+toc-depth: 6
+---
+
+## Strategies 
+
+### Tool-based strategies 
+
+#### 1. ddqc
+**Article**: [https://doi.org/10.1186/s13059-021-02547-0](https://doi.org/10.1186/s13059-021-02547-0)
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ayshwaryas/ddqc) [![GitHub stars](https://img.shields.io/github/stars/ayshwaryas/ddqc?style=social)](https://github.com/ayshwaryas/ddqc) ![Last Commit](https://img.shields.io/github/last-commit/ayshwaryas/ddqc)
+
+Identifies damaged cells within sample-specific clusters using the Louvain algorithm for clustering and MAD-based univariate outlier detection of UMI, feature counts, and mitochondrial or ribosomal percentages.
+
+[Tutorial](https://github.com/ayshwaryas/ddqc/blob/master/tutorials/ddqc_tutorial.ipynb)
+
+
+#### 2. DropletQC
+**Article**: [https://doi.org/10.1186/s13059-022-02820-w](https://doi.org/10.1186/s13059-022-02820-w)
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/powellgenomicslab/DropletQC) [![GitHub stars](https://img.shields.io/github/stars/powellgenomicslab/DropletQC?style=social)](https://github.com/powellgenomicslab/DropletQC) ![Last Commit](https://img.shields.io/github/last-commit/powellgenomicslab/DropletQC)
+
+Uses nuclear fraction (ratio of unspliced to spliced transcripts) and UMI counts with an Expectation-Maximization model to classify damaged cells.
+
+[Tutorial](https://powellgenomicslab.github.io/DropletQC/articles/DropletQC.html#identifying-damaged-cells-1)
+
+
+#### 3. EnsembleKQC 
+**Article**: [https://doi.org/10.1007/978-3-030-26969-2_47](https://doi.org/10.1007/978-3-030-26969-2_47)
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mzhq/EnsembleKQC) [![GitHub stars](https://img.shields.io/github/stars/mzhq/EnsembleKQC?style=social)](https://github.com/mzhq/EnsembleKQC) ![Last Commit](https://img.shields.io/github/last-commit/mzhq/EnsembleKQC)
+
+Combines multiple quality control measures to detect damaged cells, focusing on ensemble-based metrics 
+
+
+#### 4. miQC 
+**Article**: [https://doi.org/10.1371/journal.pcbi.1009290](https://doi.org/10.1371/journal.pcbi.1009290)
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/greenelab/miQC) [![GitHub stars](https://img.shields.io/github/stars/greenelab/miQC?style=social)](https://github.com/greenelab/miQC) ![Last Commit](https://img.shields.io/github/last-commit/greenelab/miQC)
+
+Applies a mixture model to mitochondrial percentage and library complexity to assign posterior probabilities for identifying damaged cells.
+
+[Tutorial](https://www.bioconductor.org/packages/release/bioc/vignettes/miQC/inst/doc/miQC.html)
+
+
+#### 5. SampleQC 
+**Article**: [https://doi.org/10.1186/s13059-023-02859-3](https://doi.org/10.1186/s13059-023-02859-3)
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/wmacnair/SampleQC) [![GitHub stars](https://img.shields.io/github/stars/wmacnair/SampleQC?style=social)](https://github.com/wmacnair/SampleQC) ![Last Commit](https://img.shields.io/github/last-commit/wmacnair/SampleQC)
+
+Automates sample-wide multivariate outlier detection using robust Mahalanobis distances for mitochondrial, ribosomal, and UMI counts.
+
+[Tutorial](https://github.com/wmacnair/SampleQC/blob/main/README.md)
+
+
+#### 6. Scater 
+**Article**: [https://doi.org/10.1093/bioinformatics/btw777](https://doi.org/10.1093/bioinformatics/btw777)
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alanocallaghan/scater) [![GitHub stars](https://img.shields.io/github/stars/alanocallaghan/scater?style=social)](https://github.com/alanocallaghan/scater) ![Last Commit](https://img.shields.io/github/last-commit/alanocallaghan/scater)
+
+Provides diagnostic visualizations and filtering functions to assess and remove damaged cells using user-defined thresholds
+
+[Tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/tutorial.html#automatic-pca-filtering)
+
+#### 7. valiDrops
+**Article**: [https://doi.org/10.1101/2023.02.07.526574](https://doi.org/10.1101/2023.02.07.526574)
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/madsen-lab/valiDrops)  
+[![GitHub stars](https://img.shields.io/github/stars/madsen-lab/valiDrops?style=social)](https://github.com/madsen-lab/valiDrops) ![Last Commit](https://img.shields.io/github/last-commit/madsen-lab/valiDrops)
+
+Detects apoptotic cells using scaled and transformed QC features with logistic regression and cross-validation for soft labeling.
+
+
+### Manual strategies 
+
+#### Fixed thresholding 
+
+##### 8. Mitochondrial percent expression
+Involves setting a fixed value for mitochondrial percent expression above which cells are classified as damaged. Implementation of this method varies based on preferred platform, for example using default functions in the [```Seurat```](https://satijalab.org/seurat/) R package,
+
+
+```{r, eval=FALSE}
+data[["percent.mt"]] <- PercentageFeatureSet(data, pattern = "^MT-")
+data <- subset(data, subset = percent.mt < 10)
+
+```
+
+
+And the [```Scanpy```](https://scanpy.readthedocs.io/en/stable/) python package, 
+
+
+```{python, eval=FALSE}
+data.var['mt'] = data.var_names.str.startswith('MT-')
+sc.pp.calculate_qc_metrics(data, qc_vars=['mt'], percent_top=None, log1p=False, inplace=True)
+data = data[data.obs.pct_counts_mt < 10, :]
+```
+
+<br>
+
+#### Adaptive thresholding 
+Involves setting thresholds based on the distribution of a metric/the metrics in a given dataset. For this analysis, we used the simple outlier detection method of percentiles. For metrics where an upper threshold was needed, it was set according to the 90th percentile, this included  mitochondrial percent expression and MALAT1 percent expression. For metrics where a lower threshold was needed, it was set according to the 10th percentile, this included ribosaml percent expression and library size. 
+Note that library size refers to the log10 transformed UMI and feature counts. 
+
+##### 9. Mitochondrial percent expression 
+Filtering cells with mitochondrial percent expression above the 90th percentile. 
+
+##### 10. Mitochondrial & ribosomal percent expression 
+Filtering cells with mitochondrial percent expression above the 90th percentile AND with ribosomal percent expression below the 10th percentile.
+
+##### 11. Mitochondrial, ribosomal percent expression & library size 
+Filtering cells with mitochondrial percent expression above the 90th percentile, ribosomal percent expression below the 10th percentile AND library size below the 10th percentile. 
+
+##### 12. Library size 
+Filtering cells with library sizes below the 10th percentile.
+
+##### 13. MALAT1 percent expression 
+Filtering cells with MALAT1 percent expression above the 90th percentile. 
+
+##### 14. MALAT1 & mitochondrial percent expression 
+Filtering cells with MALAT1 percent expression above the 90th percentile AND mitochondriak percent expression above the 90th percentile. 
+
+
+*******
+
+## Metrics
+
+### Performance metrics 
+The true damaged cell labels from ground truth datasets were compared to the predicted damaged cell labels of each strategy. 
+
+#### Precision-Recall Curve (PR-AUC)
+
+
+#### Precision 
+
+
+#### Similarity (Jaccard Index) to damage-free highly variable gene (HVG) set 
+
+
+#### Correctness (F1 Score) of differentially expressed genes (DEG) identified  
+
+
+*******
+
+### Performance agnostic metrics
+#### Damage focus 
+
+#### Stringency 
+
+#### Consistency 
+
+#### Usability 
+
+*******
+
+To add a new metric or suggest an adjustment to the above metrics, please visit the [Contribute](contribute.html) page. 
+
+*******
