@@ -1,0 +1,80 @@
+---
+title: "Usability"
+format: 
+  html:
+    page-layout: full
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Explore the current usability results below or [return to consensus](results.html).
+
+
+```{r, echo=FALSE}
+
+# Load necessary libraries
+library(DT)
+library(dplyr)
+library(purrr)
+
+# Read the results CSV file directly from GitHub
+data_fixed <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/D_Summary_Results/usability-fixed.csv")
+data_flexible <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/D_Summary_Results/usability-flexible.csv")
+
+# Merge according to method 
+data <- merge(data_fixed, data_flexible, by = "method")
+
+# Calculate the overall usability score 
+data$Usability <- (data$GitHub_Upload + data$GitHub_update + data$Documentation + data$Alterations + data$Stars_score + data$Ease_of_use)
+
+# Return the table
+datatable(
+  data,
+  options = list(
+    paging = FALSE,
+    lengthChange = FALSE,
+    dom = 'Bfrtip',
+    buttons = c('colvis', 'csv', 'excel'),
+    columnDefs = list(
+      list(targets = c(0), visible = FALSE)
+    ), 
+    headerCallback = JS(
+      "function(thead, data, start, end, display) {",
+      "  var usabilityHeader1 = $(thead).find('th').eq(1);",  # Index of column (adjust if necessary)
+      "  usabilityHeader1.css('cursor', 'pointer');",         # Change cursor to indicate it's clickable
+      "  usabilityHeader1.on('click', function() {",
+      "    alert('Is some form of documentation available to guide damaged cell filtering?');",
+      "  });",
+      "  var usabilityHeader2 = $(thead).find('th').eq(2);",  # Index of column (adjust if necessary)
+      "  usabilityHeader2.css('cursor', 'pointer');",         # Change cursor to indicate it's clickable
+      "  usabilityHeader2.on('click', function() {",
+      "    alert('Were alterations to the source code required to perform damaged cell filtering?');",
+      "  });",
+      "  var usabilityHeader3 = $(thead).find('th').eq(3);",  # Index of column (adjust if necessary)
+      "  usabilityHeader3.css('cursor', 'pointer');",         # Change cursor to indicate it's clickable
+      "  usabilityHeader3.on('click', function() {",
+      "    alert('Subjective score based on installation, dependencies, number of steps required to obtain output classification, accessibility of input data information, etc.');",
+      "  });",
+      "  var usabilityHeader4 = $(thead).find('th').eq(7);",  # Index of column (adjust if necessary)
+      "  usabilityHeader4.css('cursor', 'pointer');",         # Change cursor to indicate it's clickable
+      "  usabilityHeader4.on('click', function() {",
+      "    alert('Was the last update made less than 2 years ago?');",
+      "  });",
+      "}"
+    )
+  ),
+  colnames = c("GitHub Upload" = "GitHub_Upload",
+               "GitHub Update" = "GitHub_update",
+               "GitHub Stars" = "Stars_score",
+               "Ease of use" = "Ease_of_use"),
+  extensions = 'Buttons'
+) %>%
+  formatRound(
+    columns = c("GitHub Stars", "Ease of use", "Usability"), 
+    digits = 2
+)
+
+```
+
+

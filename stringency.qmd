@@ -1,0 +1,54 @@
+---
+title: "Stringency"
+format: 
+  html:
+    page-layout: full
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Explore the current stringency results below or [return to consensus](results.html).
+
+
+```{r, echo=FALSE}
+
+# Load necessary libraries
+library(DT)
+library(dplyr)
+library(purrr)
+
+# Read the results CSV file directly from GitHub
+data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/D_Summary_Results/proportion-damaged.csv")
+
+# Get column indices for the columns to show
+columns_to_show <- c("strategy", "median_groundtruth", "median_non_groundtruth", "median_simulated", "stringency")
+column_indices <- which(names(data) %in% columns_to_show)
+
+# Return the table
+datatable(
+  data,
+  options = list(
+    paging = FALSE,
+    lengthChange = FALSE,
+    dom = 'Bfrtip',
+    buttons = c('colvis', 'csv', 'excel'),
+    columnDefs = list(
+      list(targets = setdiff(seq_along(data), column_indices) - 1, visible = FALSE)
+    )
+  ),
+  colnames = c("Groundtruth" = "median_groundtruth",
+               "Strategy" = "strategy",
+               "Non-groundtruth" = "median_non_groundtruth",
+               "Simulated" = "median_simulated", 
+               "Median" = "stringency"),
+  extensions = 'Buttons'
+) %>%
+  formatRound(
+    columns = c("Groundtruth", "Non-groundtruth", "Simulated", "Median"), 
+    digits = 2
+  )
+
+```
+
+

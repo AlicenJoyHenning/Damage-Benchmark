@@ -1,0 +1,47 @@
+---
+title: "Damage focus"
+format: 
+  html:
+    page-layout: full
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Explore the current damage focus results below or [return to consensus](results.html).
+
+
+```{r, echo=FALSE}
+
+# Load necessary libraries
+library(DT)
+library(dplyr)
+library(purrr)
+
+# Read the results CSV file directly from GitHub
+data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/D_Summary_Results/damage-focus.csv")
+
+
+# Return the table
+datatable(
+  data,
+  options = list(
+    paging = FALSE,
+    lengthChange = FALSE,
+    dom = 'Bfrtip',
+    buttons = c('colvis', 'csv', 'excel'),
+    columnDefs = list(
+      list(targets = c(0), visible = FALSE)
+    )
+  ),
+  colnames = c("Damage focus" = "Damage.focus"),
+  extensions = 'Buttons'
+) %>%
+  formatRound(
+    columns = c("apoptotic", "pro_apoptotic", "dead_SA928", "dying_SA928", "dead_SA604", "Damage focus"), 
+    digits = 2
+  )
+
+```
+
+

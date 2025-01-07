@@ -1,0 +1,52 @@
+---
+title: "Consistency"
+format: 
+  html:
+    page-layout: full
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Explore the current consistency results below or [return to consensus](results.html).
+
+
+```{r, echo=FALSE}
+
+# Load necessary libraries
+library(DT)
+library(dplyr)
+library(purrr)
+
+# Read the results CSV file directly from GitHub
+data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/D_Summary_Results/consistency.csv")
+
+# Return the table
+datatable(
+  data,
+  options = list(
+    paging = FALSE,
+    lengthChange = FALSE,
+    dom = 'Bfrtip',
+    buttons = c('colvis', 'csv', 'excel'),
+    columnDefs = list(
+      list(targets = c(0, 6), visible = FALSE) 
+    )
+  ),
+  colnames = c("Groundtruth" = "consistency_groundtruth",
+               "Non-groundtruth" = "consistency_non_groundtruth",
+               "Simulated" = "consistency_simulated", 
+               "Median" = "median", 
+               "Overall ranking" = "final_rank"),
+  extensions = 'Buttons'
+) %>%
+  formatRound(
+    columns = c("Groundtruth", "Non-groundtruth", "Simulated", "Median"), 
+    digits = 2
+  )
+
+
+
+```
+
+

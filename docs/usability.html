@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Results – Damage Benchmark</title>
+<title>Usability – Damage Benchmark</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Benchmark</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./results.html" aria-current="page"> 
+    <a class="nav-link" href="./results.html"> 
 <span class="menu-text">Results</span></a>
   </li>  
   <li class="nav-item">
@@ -155,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Results</h1>
+<h1 class="title">Usability</h1>
 </div>
 
 
@@ -172,21 +172,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Explore the current consensus results below. The order of the strategies can be changed by clicking the arrows positioned by the column header of a metric, such as performance. For less cluttered viewing, select the columns you wish to see using the <strong>Column visibility</strong> button.</p>
-<p>To explore isolated components of the consensus click here, <a href="stringency.html">stringency</a>, <a href="./damage-focus.html">damage focus</a>, <a href="consistency.html">consistency</a>, <a href="usability.html">usability</a></p>
-<section id="damaged-cell-detection-strategies" class="level2">
-<h2 class="anchored" data-anchor-id="damaged-cell-detection-strategies">Damaged Cell Detection Strategies</h2>
+<p>Explore the current usability results below or <a href="results.html">return to consensus</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a412db33aee0ccfb86eb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a412db33aee0ccfb86eb">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],["Manual (adaptive mito.)","Manual (mito., ribo.)","Scater","miQC","Manual (MALAT1, mito., ribo.)","Manual (mito., ribo., library)","valiDrops","Manual (MALAT1)","Manual (fixed mito.)","Manual (library)","DropletQC","SampleQC","ddqc","EnsembleKQC"],["-","-","R","R","-","-","R","-","-","-","R","R","R, Python","Python"],["mito. percent","mito. percent,ribo. percent","mito. percent,library size","mito. percent,library size","MALAT1 percent,mito. percent,ribo. percent","mito. percent,ribo. percent,library size","mito. percent,library size","MALAT1 percent","mito. percent","library size","nuclear fraction,library size","mito. percent,library size","mito. percent,library size","mito. percent,library size,housekeeping genes"],["Percentile","Percentile","PCA","Mixture modelling","Percentile","Percentile","Machine learning","Percentile","Percentile","Percentile","Expectation-maximization","Mixture modelling","MAD","MAD"],[37,32,30,30,26,24,22,19,14,10,7,4,4,0],[6.11764705882353,3.41321600029701,4.82720229135083,18.8716230366122,0.694055748348819,1.03898410443122,1.64496230294722,4.02612096886769,24.9883113960682,10.1072607260726,0,11.377371427768,14.307948862792,30.6019730219448],[0.9658703,0.9840637,0.5,0.9552352,0.9565217,1,1,0.9027778,0.8927203,0.7337006,0,0.5725190999999999,0.5354331,0.5743146],[0.540608619,0.593173305,0.798238189,0.31344998,0.751814369,0.736055264,0.839062724,0.781523179,0.513660614,0.350712309,0.779448587,0.636263384,0.731293055,0.72318676],[0,0,13,9.90625,0,0,8.25,0,0,0,8.578125,10.8125,9.171875,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Strategy<\/th>\n      <th>Platform<\/th>\n      <th>Metric<\/th>\n      <th>Outlier detection<\/th>\n      <th>Performance<\/th>\n      <th>Stringency<\/th>\n      <th>Damage focus<\/th>\n      <th>Consistency<\/th>\n      <th>Usability<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"paging":false,"lengthChange":false,"dom":"Bfrtip","buttons":["colvis","csv","excel"],"columnDefs":[{"targets":5,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":7,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":6,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":8,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":9,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":0,"visible":false},{"targets":[2,3,4],"visible":false},{"targets":"_all","width":"300px"},{"className":"dt-right","targets":[5,6,7,8,9]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Strategy","targets":1},{"name":"Platform","targets":2},{"name":"Metric","targets":3},{"name":"Outlier.detection","targets":4},{"name":"Performance","targets":5},{"name":"Stringency","targets":6},{"name":"Damage.focus","targets":7},{"name":"Consistency","targets":8},{"name":"Usability","targets":9}],"headerCallback":"function(thead, data, start, end, display) {\n  var usabilityHeader = $(thead).find('th').eq(8);\n  usabilityHeader.css('cursor', 'pointer');\n  usabilityHeader.on('click', function() {\n    alert('The Usability column shows the score out of 15 based on the evaluation criteria.');\n  });\n}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.columnDefs.3.render","options.columnDefs.4.render","options.headerCallback"],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c769716eee23a3d1ea57" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c769716eee23a3d1ea57">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],["ddqc","DropletQC","ensembleKQC","manual_adaptive_mito","manual_fixed_mito","manual_library","manual_malat1","manual_malat1_mito_ribo","manual_mito_ribo","manual_mito_ribo_library","miQC","SampleQC","scater","valiDrops"],[1,1,0,0,0,0,0,0,0,0,1,1,1,1],[1,1,0,0,0,0,0,0,0,0,1,1,1,1],[4,3,1,0,0,0,0,0,0,0,4.5,4,5,4],[15,34,0,0,0,0,0,0,0,0,19,36,95,16],[1,1,1,0,0,0,0,0,0,0,1,1,1,1],["2023-05-22","2021-11-18","2019-10-31","0","0","0","0","0","0","0","2023-01-04","2022-11-14","2024-07-18","2024-10-25"],[1,0,0,0,0,0,0,0,0,0,0,0,1,1],[0.789473684210526,1.78947368421053,0,0,0,0,0,0,0,0,1,1.89473684210526,5,0.842105263157895],[8.789473684210526,7.78947368421053,2,0,0,0,0,0,0,0,8.5,8.89473684210526,14,8.842105263157894]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>method<\/th>\n      <th>Documentation<\/th>\n      <th>Alterations<\/th>\n      <th>Ease of use<\/th>\n      <th>Stars<\/th>\n      <th>GitHub Upload<\/th>\n      <th>Last_Push<\/th>\n      <th>GitHub Update<\/th>\n      <th>GitHub Stars<\/th>\n      <th>Usability<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"paging":false,"lengthChange":false,"dom":"Bfrtip","buttons":["colvis","csv","excel"],"columnDefs":[{"targets":9,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":4,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":10,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":0,"visible":false},{"className":"dt-right","targets":[2,3,4,5,6,8,9,10]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"method","targets":1},{"name":"Documentation","targets":2},{"name":"Alterations","targets":3},{"name":"Ease_of_use","targets":4},{"name":"Stars","targets":5},{"name":"GitHub_Upload","targets":6},{"name":"Last_Push","targets":7},{"name":"GitHub_update","targets":8},{"name":"Stars_score","targets":9},{"name":"Usability","targets":10}],"headerCallback":"function(thead, data, start, end, display) {\n  var usabilityHeader1 = $(thead).find('th').eq(1);\n  usabilityHeader1.css('cursor', 'pointer');\n  usabilityHeader1.on('click', function() {\n    alert('Is some form of documentation available to guide damaged cell filtering?');\n  });\n  var usabilityHeader2 = $(thead).find('th').eq(2);\n  usabilityHeader2.css('cursor', 'pointer');\n  usabilityHeader2.on('click', function() {\n    alert('Were alterations to the source code required to perform damaged cell filtering?');\n  });\n  var usabilityHeader3 = $(thead).find('th').eq(3);\n  usabilityHeader3.css('cursor', 'pointer');\n  usabilityHeader3.on('click', function() {\n    alert('Subjective score based on installation, dependencies, number of steps required to obtain output classification, accessibility of input data information, etc.');\n  });\n  var usabilityHeader4 = $(thead).find('th').eq(7);\n  usabilityHeader4.css('cursor', 'pointer');\n  usabilityHeader4.on('click', function() {\n    alert('Was the last update made less than 2 years ago?');\n  });\n}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.headerCallback"],"jsHooks":[]}</script>
 </div>
 </div>
-<p><br></p>
-<hr>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
