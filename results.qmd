@@ -21,7 +21,7 @@ library(DT)
 library(dplyr)
 
 # Read the results CSV file directly from GitHub
-data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/consensus-results.csv", sep = ";")
+data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/D_Summary_Results/consensus-results.csv", sep = ";")
 
 # Return the table
 datatable(

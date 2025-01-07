@@ -156,7 +156,7 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./data.html"> 
-<span class="menu-text">Data</span></a>
+<span class="menu-text">Datasets</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./benchmark.html" aria-current="page"> 
@@ -423,7 +423,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="performance-agnostic-metrics">Performance agnostic metrics</h3>
 <section id="damage-focus" class="level4">
 <h4 class="anchored" data-anchor-id="damage-focus">Damage focus</h4>
-<p>This measures how many of the damaged predictions originate from the population of damaged cells that have a significantly altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth dataset, is a proportion and lies in the range ( 0, 1 ) where we pose that closer to 1 is ideal.</p>
+<p>This score measures how many of the damaged predictions originate from the population of damaged cells that have a significantly altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth datasets, is a proportion and lies in the range ( 0, 1 ) where we pose that closer to 1 is ideal.</p>
 <p><br></p>
 </section>
 <section id="stringency" class="level4">
@@ -433,6 +433,34 @@ window.Quarto = {
 </section>
 <section id="consistency" class="level4">
 <h4 class="anchored" data-anchor-id="consistency">Consistency</h4>
+<p>This score measures the deviation in the output of a tool across datasets. This is made up of two components: the deviation in the proportion of damaged cells detected by a strategy and the deviation in the similarity of the strategy output compared to that of other strategies. In other words, the consistency of a strategy, (i), is calculated as,</p>
+<p><span class="math display">\[
+\text{Consistency}_\text{ i} = 1 - \left( 0.5 \cdot \text{damage deviation}_\text{ i} + 0.5 \cdot \text{similarity deviation}_\text{ i } \right)
+\]</span></p>
+<p>that lies in the range ( 0, 1 ).</p>
+<p><br></p>
+<p>More specifically,</p>
+<p><span class="math display">\[
+\text{damage deviation}_\text{ i} = \sigma\ \text{( stringency}_\text{ i })
+\]</span> taken across datasets and stringency refers to the proportion of cells marked as damaged by the strategy. To transform this value within [0, 1], we performed min-max scaling across all tools, j,</p>
+<p><span class="math display">\[
+\text{damage deviation}_\text{ i} = \frac{
+    \text{damage deviation}_\text{ i} - \min\left( \text{damage deviation}_\text{ j} \right)
+}{
+    \max\left( \text{damage deviation}_\text{ j} \right) - \min\left( \text{damage deviation}_\text{ j} \right)
+}
+\]</span></p>
+<p>Note that this was calculated for each dataset type = ground truth, non-ground truth, and simulated = to find a median damage deviation score for each strategy. This was done due to address the imbalance between dataset types.</p>
+<p>Similarily, <span class="math display">\[
+\text{similarity deviation}_\text{ i} = \text{median (} {\sigma_j(\kappa_{ij})} )
+\]</span> for a strategy, i, compared to each other strategy, j, and the median is found across strategies. Note that scaling was performed,</p>
+<p><span class="math display">\[
+\text{similarity deviation}_\text{ i} = \frac{
+    \text{similarity deviation}_\text{ i} - \min\left( \text{similarity deviation}_\text{ j} \right)
+}{
+    \max\left( \text{similarity deviation}_\text{ j} \right) - \min\left( \text{similarity deviation}_\text{ j} \right)
+}
+\]</span> and the final similarity score found by taking the median across the three dataset types.</p>
 <p><br></p>
 </section>
 <section id="usability" class="level4">

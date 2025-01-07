@@ -175,7 +175,7 @@ You can view the individual performance scores for the strategies, [here]().
 
 ### Performance agnostic metrics
 #### Damage focus 
-This measures how many of the damaged predictions originate from the population of damaged cells that have a significantly altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth datasets, is a proportion and lies in the range  \left( 0, 1 \right) where we pose that closer to 1 is ideal.
+This score measures how many of the damaged predictions originate from the population of damaged cells that have a significantly altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth datasets, is a proportion and lies in the range  \left( 0, 1 \right) where we pose that closer to 1 is ideal.
 
 <br>
 
@@ -186,6 +186,52 @@ This score measures how many of the cells present were labelled as damaged by th
 <br>
 
 #### Consistency 
+This score measures the deviation in the output of a tool across datasets. This is made up of two components: the deviation in the proportion of damaged cells detected by a strategy and the deviation in the similarity of the strategy output compared to that of other strategies. In other words, the consistency of a strategy, \(i\), is calculated as, 
+
+$$
+\text{Consistency}_\text{ i} = 1 - \left( 0.5 \cdot \text{damage deviation}_\text{ i} + 0.5 \cdot \text{similarity deviation}_\text{ i } \right)
+$$
+
+
+that lies in the range  \left( 0, 1 \right). 
+
+<br>
+
+More specifically, 
+
+$$
+\text{damage deviation}_\text{ i} = \sigma\ \text{( stringency}_\text{ i })
+$$
+taken across datasets and stringency refers to the proportion of cells marked as damaged by the strategy. To transform this value within [0, 1], we performed min-max scaling across all tools, j, 
+  
+
+$$
+\text{damage deviation}_\text{ i} = \frac{
+    \text{damage deviation}_\text{ i} - \min\left( \text{damage deviation}_\text{ j} \right)
+}{
+    \max\left( \text{damage deviation}_\text{ j} \right) - \min\left( \text{damage deviation}_\text{ j} \right)
+}
+$$
+
+
+Note that this was calculated for each dataset type = ground truth, non-ground truth, and simulated = to find a median damage deviation score for each strategy. This was done due to address the imbalance between dataset types. 
+
+
+Similarily,
+$$
+\text{similarity deviation}_\text{ i} = \text{median (} {\sigma_j(\kappa_{ij})} ) 
+$$
+for a strategy, i, compared to each other strategy, j, and the median is found across strategies. Note that scaling was performed, 
+
+$$
+\text{similarity deviation}_\text{ i} = \frac{
+    \text{similarity deviation}_\text{ i} - \min\left( \text{similarity deviation}_\text{ j} \right)
+}{
+    \max\left( \text{similarity deviation}_\text{ j} \right) - \min\left( \text{similarity deviation}_\text{ j} \right)
+}
+$$
+ and the final similarity score found by taking the median across the three dataset types. 
+
 
 <br>
 
