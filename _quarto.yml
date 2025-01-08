@@ -8,8 +8,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - data.qmd
       - benchmark.qmd
+      - data.qmd
       - results.qmd
       - contribute.qmd
     tools:
