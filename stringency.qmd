@@ -23,18 +23,19 @@ data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolR
 
 # Get column indices for the columns to show
 columns_to_show <- c("strategy", "median_groundtruth", "median_non_groundtruth", "median_simulated", "stringency")
-column_indices <- which(names(data) %in% columns_to_show)
+subset_data <- data[, columns_to_show, drop = FALSE]
+# column_indices <- which(names(data) %in% columns_to_show)
 
 # Return the table
 datatable(
-  data,
+  subset_data,
   options = list(
     paging = FALSE,
     lengthChange = FALSE,
     dom = 'Bfrtip',
     buttons = c('colvis', 'csv', 'excel'),
     columnDefs = list(
-      list(targets = setdiff(seq_along(data), column_indices) - 1, visible = FALSE)
+      list(targets = c(0), visible = FALSE) # Hide the first column (index 0 in JS)
     )
   ),
   colnames = c("Groundtruth" = "median_groundtruth",
@@ -49,6 +50,10 @@ datatable(
     digits = 2
   )
 
+
+
 ```
 
+To view the stringency scores for each of the 51 datasets, access [here](https://github.com/AlicenJoyHenning/DamageToolReviewArticle/blob/main/data/D_Summary_Results/proportion-damaged.csv)
 
+******

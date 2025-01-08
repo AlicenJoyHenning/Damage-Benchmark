@@ -155,19 +155,19 @@ $$
 
 where, 
 
-- **Precision**  \left( 0, 1 \right) : Of all damaged predictions made, what proportion were true damaged cells?  
+- **Precision**  $\text{(0, 1)}$ Of all damaged predictions made, what proportion were true damaged cells?  
   _Median score taken from the 5 experimentally verified ground truth datasets._
 
-- **PR-AUC**  \left( 0, 1 \right) : Of all predictions, were damaged cells correctly and comprehensively identified (i.e., were true damaged cells missed)?  
+- **PR-AUC**  $\text{(0, 1)}$ Of all predictions, were damaged cells correctly and comprehensively identified (i.e., were true damaged cells missed)?  
   _Median score taken from the 5 experimentally verified ground truth datasets._
 
-- **Jaccard Index**  \left( 0, 1 \right) : How similar were the filtered datasets to the positive, damage-free control (closer to the control indicates better correction for damage)?  
+- **Jaccard Index** $\text{(0, 1)}$  How similar were the filtered datasets to the positive, damage-free control (closer to the control indicates better correction for damage)?  
   _Median score taken from the 30 simulated ground truth datasets._
 
-- **F1 Score**  \left( 0, 1 \right) : Were the differentially expressed genes of the filtered datasets correct compared to the positive, damage-free control?  
+- **F1 Score** $\text{(0, 1)}$ Were the differentially expressed genes of the filtered datasets correct compared to the positive, damage-free control?  
   _Median score taken from the 30 simulated ground truth datasets._
 
-Thus, **Performance** lies in the range  \left( 0, 4 \right) , with 4 being the highest performance possible.
+Thus, **Performance** lies in the range   $\text{(0, 4)}$, with 4 being the highest performance possible.
 
 You can view the individual performance scores for the strategies, [here](). 
 
@@ -176,80 +176,73 @@ You can view the individual performance scores for the strategies, [here]().
 ### Performance agnostic metrics
 
 #### Damage focus 
-This score measures how many of the damaged predictions originate from the population of damaged cells that have a significantly altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth datasets, is a proportion and lies in the range  \left( 0, 1 \right) where we pose that closer to 1 is ideal.
+This score measures how many of the damaged predictions originate from the population of damaged cells that have a heavily altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth datasets, is a proportion and lies in the range  $\text{(0, 1)}$ where we suggest that closer to 1 is ideal.
+
+You can view the isolated damage focus scores, [here](damage-focus.html). 
 
 <br>
 
 
 #### Stringency 
-This score measures how many of the cells present were labelled as damaged by the strategy. While this proportion is not especially valuable when viewed in an isolated dataset, collecting it across many datasets, here 51, gives a good idea of how stringent the strategy is in general and how a user can expect it to be when applied to new data. This is offered in response to one of the most prominent concerns for damaged cell filtering strategies: that they will remove too many cells (too stringent), or won't remove enough (too lenient). Being a proportion, this score ranges from \left( 0, 1 \right) where closer to 1 represents more stringent strategies.
+This score measures how many of the cells present were labelled as damaged by the strategy. While this percentage is not especially valuable when viewed in an isolated dataset, collecting it across many datasets, here 51, gives a good idea of how stringent the strategy is in general and how a user can expect it to be when applied to new data. This is offered in response to one of the most prominent concerns for damaged cell filtering strategies: that they will remove too many cells, i.e. be too stringent, or won't remove enough, i.e. be too lenient. Being a percentage, this score ranges from $\text{(0, 100)}$ where closer to 100 represents more stringent strategies.
+
+You can view the isolated stringency scores, [here](stringency.html). 
 
 <br>
 
 #### Consistency 
-This score measures the deviation in the output of a tool across datasets. This is made up of two components: the deviation in the proportion of damaged cells detected by a strategy and the deviation in the similarity of the strategy output compared to that of other strategies. In other words, the consistency of a strategy, \(i\), is calculated as, 
+This score measures the deviation in the output of a tool across datasets,  
 
 $$
-\text{Consistency}_\text{ i} = 1 - \left( 0.5 \cdot \text{damage deviation}_\text{ i} + 0.5 \cdot \text{similarity deviation}_\text{ i } \right)
+\text{Consistency} = 1 - \left( \text{c}_1 \cdot \text{similarity deviation} + \text{c}_2 \cdot \text{stringency deviation} \right)
 $$
 
 
-that lies in the range  \left( 0, 1 \right). 
+
+made up of two components, $\text{similarity deviation}$ and $\text{stringency deviation}$, combined by constants $c_{1}$ and $c_{2}$ which are both $0.5$ but can be altered to emphasize's ones contribution over the other. 
+
+
+The $\text{similarity deviation}$ for a given strategy $i$ is computed as the mean of the standard deviations of Cohen's kappa scores $\kappa_{ij}$ for strategy $i$ compared to another strategy $j$ $(j \neq i)$ across datasets. Here, $\kappa_{ij}$ is calculated by comparing the set of damaged cell labels given by strategy $i$ to those given by strategy $j$ for the same dataset. The standard deviation $\sigma(\kappa_{ij})$ is taken across all datasets, and the mean is calculated over the all deviation scores for tool $i$, amounting to ${(J - 1)}$ where $J$ is the total number of strategies. Since $\kappa$ ranges from $-1$ to $1$, where $1$ indicates complete agreement and $-1$ indicates complete disagreement, deviation scores typically range on the lower end of $(0, 1)$. To standardize the similarity deviation score for the consistency equation, min-max scaling is applied across strategies, setting the highest mean deviation to $1$ and the lowest to $0$.
+
+
+$$
+ \text{similarity deviation} = \frac{1}{J - 1} \sum_{j \neq i} \sigma(\kappa_{ij})
+$$
+
+More simply, $\text{stringency deviation}$ is taken as the standard deviation in the stringency score for a particular strategy, $i$, across datasets, where stringency is the percentage of damaged cells detected by the strategy. And as with $\text{similarity deviation}$, the $\text{stringency deviation}$ score is standardised by min-max scaling for the consistency equation, setting the highest deviation to $1$ and the lowest to $0$.
+
+$$
+ \text{stringency deviation} =  \sigma(\text{damaged cells / total cells})
+$$ 
+
 
 <br>
 
-More specifically, 
+Note, each component is measured across the dataset types in isolation before being combined in the form of a median to generate the final deviation score. i.e, $\text{stringency deviation}$ is the median of the score taken across the groundtruth, non-groundtruth, and simulated datasets. This is done to avoid imbalancing the consistency score with any one dataset type. 
 
-$$
-\text{damage deviation}_\text{ i} = \sigma\ \text{( stringency}_\text{ i })
-$$
-taken across datasets and stringency refers to the proportion of cells marked as damaged by the strategy. To transform this value within [0, 1], we performed min-max scaling across all tools, j, 
-  
+<br>
 
-$$
-\text{damage deviation}_\text{ i} = \frac{
-    \text{damage deviation}_\text{ i} - \min\left( \text{damage deviation}_\text{ j} \right)
-}{
-    \max\left( \text{damage deviation}_\text{ j} \right) - \min\left( \text{damage deviation}_\text{ j} \right)
-}
-$$
+You can view the isolated consistency scores, [here](consistency.html). 
 
-
-Note that this was calculated for each dataset type = ground truth, non-ground truth, and simulated = to find a median damage deviation score for each strategy. This was done due to address the imbalance between dataset types. 
-
-
-Similarily,
-$$
-\text{similarity deviation}_\text{ i} = \text{median (} {\sigma_j(\kappa_{ij})} ) 
-$$
-for a strategy, i, compared to each other strategy, j, and the median is found across strategies. Note that scaling was performed, 
-
-$$
-\text{similarity deviation}_\text{ i} = \frac{
-    \text{similarity deviation}_\text{ i} - \min\left( \text{similarity deviation}_\text{ j} \right)
-}{
-    \max\left( \text{similarity deviation}_\text{ j} \right) - \min\left( \text{similarity deviation}_\text{ j} \right)
-}
-$$
- and the final similarity score found by taking the median across the three dataset types. 
-
-
+<br>
 <br>
 
 #### Usability 
-This is a manual scoring of tool-based strategies according to 6 criteria, 
+This is a manual and automated scoring of tool-based strategies according to 6 criteria, 
 
-| Criterion                                      | No  | Yes  | Maximum |
-|-----------------------------------------------|-----|------|---------|
-| Presence of documentation                     | 0   | 1    | 1       |
-| More than one code deployment                 | 0   | 1    | 1       |
-| Last adjustment to tool less than two years ago | 0   | 1    | 1       |
-| Alterations to core code required             | 1   | 0    | 1       |
-| GitHub stars[^1]                              | 0   | ...  | 5       |
-| Ease of use[^2]                               | ... | ...  | 5       |
+| Criterion        | Automated |                       | No  | Yes  | Maximum |
+|----------------------------------|-------------|-----|------|---------|
+| Presence of documentation                     |  | 0   | 1    | 1       |
+| More than one code deployment                 | ✓ | 0   | 1    | 1       |
+| Last adjustment to tool less than two years ago | ✓ | 0   | 1    | 1       |
+| Alterations to core code required             |  | 1   | 0    | 1       |
+| GitHub stars[^1]                              | ✓ | 0   | ...  | 5       |
+| Ease of use[^2]                               |  | ... | ...  | 5       |
 
 [^1]: GitHub stars underwent min-max scaling.  
 [^2]: Subjective score based on installation, dependencies, number of steps required to obtain output classification, accessibility of input data information, etc.
+
+You can view the isolated usability scores, [here](usability.html). 
 
 <br>
 

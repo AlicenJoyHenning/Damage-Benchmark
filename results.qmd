@@ -8,9 +8,9 @@ editor:
     wrap: 72
 ---
 
-Explore the current consensus results below. The order of the strategies can be changed by clicking the arrows positioned by the column header of a metric, such as performance. For less cluttered viewing, select the columns you wish to see using the **Column visibility** button. 
+Explore the current consensus results below. The order of the strategies can be changed by clicking the arrows positioned by the column header of a metric, such as performance. For less cluttered viewing, select the columns you wish to see using the **Column visibility** button. Descriptions of each metric can be found [here](benchmark.html#metrics). 
 
-To explore isolated components of the consensus click here, [stringency](stringency.html), [damage focus](damage-focus.qmd), [consistency](consistency.html), [usability](usability.html)
+To explore isolated components of the consensus click here, [performance](performance.html), [stringency](stringency.html), [damage focus](damage-focus.qmd), [consistency](consistency.html), [usability](usability.html)
 
 ## Damaged Cell Detection Strategies
 

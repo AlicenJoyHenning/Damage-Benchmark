@@ -406,16 +406,16 @@ window.Quarto = {
 \]</span></p>
 <p>where,</p>
 <ul>
-<li><p><strong>Precision</strong> ( 0, 1 ) : Of all damaged predictions made, what proportion were true damaged cells?<br>
+<li><p><strong>Precision</strong> <span class="math inline">\(\text{(0, 1)}\)</span> Of all damaged predictions made, what proportion were true damaged cells?<br>
 <em>Median score taken from the 5 experimentally verified ground truth datasets.</em></p></li>
-<li><p><strong>PR-AUC</strong> ( 0, 1 ) : Of all predictions, were damaged cells correctly and comprehensively identified (i.e., were true damaged cells missed)?<br>
+<li><p><strong>PR-AUC</strong> <span class="math inline">\(\text{(0, 1)}\)</span> Of all predictions, were damaged cells correctly and comprehensively identified (i.e., were true damaged cells missed)?<br>
 <em>Median score taken from the 5 experimentally verified ground truth datasets.</em></p></li>
-<li><p><strong>Jaccard Index</strong> ( 0, 1 ) : How similar were the filtered datasets to the positive, damage-free control (closer to the control indicates better correction for damage)?<br>
+<li><p><strong>Jaccard Index</strong> <span class="math inline">\(\text{(0, 1)}\)</span> How similar were the filtered datasets to the positive, damage-free control (closer to the control indicates better correction for damage)?<br>
 <em>Median score taken from the 30 simulated ground truth datasets.</em></p></li>
-<li><p><strong>F1 Score</strong> ( 0, 1 ) : Were the differentially expressed genes of the filtered datasets correct compared to the positive, damage-free control?<br>
+<li><p><strong>F1 Score</strong> <span class="math inline">\(\text{(0, 1)}\)</span> Were the differentially expressed genes of the filtered datasets correct compared to the positive, damage-free control?<br>
 <em>Median score taken from the 30 simulated ground truth datasets.</em></p></li>
 </ul>
-<p>Thus, <strong>Performance</strong> lies in the range ( 0, 4 ) , with 4 being the highest performance possible.</p>
+<p>Thus, <strong>Performance</strong> lies in the range <span class="math inline">\(\text{(0, 4)}\)</span>, with 4 being the highest performance possible.</p>
 <p>You can view the individual performance scores for the strategies, <a href="">here</a>.</p>
 <hr>
 </section>
@@ -423,52 +423,44 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="performance-agnostic-metrics">Performance agnostic metrics</h3>
 <section id="damage-focus" class="level4">
 <h4 class="anchored" data-anchor-id="damage-focus">Damage focus</h4>
-<p>This score measures how many of the damaged predictions originate from the population of damaged cells that have a significantly altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth datasets, is a proportion and lies in the range ( 0, 1 ) where we pose that closer to 1 is ideal.</p>
+<p>This score measures how many of the damaged predictions originate from the population of damaged cells that have a heavily altered transcriptomic profile compared to control cells. Here, a strategy that is highly specific to this population, rather than to the population of damaged cells that appear identical to control cells and pose no contamination risk, is ideal. This value, derived from the median across the 5 experimentally verified ground truth datasets, is a proportion and lies in the range <span class="math inline">\(\text{(0, 1)}\)</span> where we suggest that closer to 1 is ideal.</p>
+<p>You can view the isolated damage focus scores, <a href="damage-focus.html">here</a>.</p>
 <p><br></p>
 </section>
 <section id="stringency" class="level4">
 <h4 class="anchored" data-anchor-id="stringency">Stringency</h4>
-<p>This score measures how many of the cells present were labelled as damaged by the strategy. While this proportion is not especially valuable when viewed in an isolated dataset, collecting it across many datasets, here 51, gives a good idea of how stringent the strategy is in general and how a user can expect it to be when applied to new data. This is offered in response to one of the most prominent concerns for damaged cell filtering strategies: that they will remove too many cells (too stringent), or won’t remove enough (too lenient). Being a proportion, this score ranges from ( 0, 1 ) where closer to 1 represents more stringent strategies.</p>
+<p>This score measures how many of the cells present were labelled as damaged by the strategy. While this percentage is not especially valuable when viewed in an isolated dataset, collecting it across many datasets, here 51, gives a good idea of how stringent the strategy is in general and how a user can expect it to be when applied to new data. This is offered in response to one of the most prominent concerns for damaged cell filtering strategies: that they will remove too many cells, i.e.&nbsp;be too stringent, or won’t remove enough, i.e.&nbsp;be too lenient. Being a percentage, this score ranges from <span class="math inline">\(\text{(0, 100)}\)</span> where closer to 100 represents more stringent strategies.</p>
+<p>You can view the isolated stringency scores, <a href="stringency.html">here</a>.</p>
 <p><br></p>
 </section>
 <section id="consistency" class="level4">
 <h4 class="anchored" data-anchor-id="consistency">Consistency</h4>
-<p>This score measures the deviation in the output of a tool across datasets. This is made up of two components: the deviation in the proportion of damaged cells detected by a strategy and the deviation in the similarity of the strategy output compared to that of other strategies. In other words, the consistency of a strategy, (i), is calculated as,</p>
+<p>This score measures the deviation in the output of a tool across datasets,</p>
 <p><span class="math display">\[
-\text{Consistency}_\text{ i} = 1 - \left( 0.5 \cdot \text{damage deviation}_\text{ i} + 0.5 \cdot \text{similarity deviation}_\text{ i } \right)
+\text{Consistency} = 1 - \left( \text{c}_1 \cdot \text{similarity deviation} + \text{c}_2 \cdot \text{stringency deviation} \right)
 \]</span></p>
-<p>that lies in the range ( 0, 1 ).</p>
-<p><br></p>
-<p>More specifically,</p>
+<p>made up of two components, <span class="math inline">\(\text{similarity deviation}\)</span> and <span class="math inline">\(\text{stringency deviation}\)</span>, combined by constants <span class="math inline">\(c_{1}\)</span> and <span class="math inline">\(c_{2}\)</span> which are both <span class="math inline">\(0.5\)</span> but can be altered to emphasize’s ones contribution over the other.</p>
+<p>The <span class="math inline">\(\text{similarity deviation}\)</span> for a given strategy <span class="math inline">\(i\)</span> is computed as the mean of the standard deviations of Cohen’s kappa scores <span class="math inline">\(\kappa_{ij}\)</span> for strategy <span class="math inline">\(i\)</span> compared to another strategy <span class="math inline">\(j\)</span> <span class="math inline">\((j \neq i)\)</span> across datasets. Here, <span class="math inline">\(\kappa_{ij}\)</span> is calculated by comparing the set of damaged cell labels given by strategy <span class="math inline">\(i\)</span> to those given by strategy <span class="math inline">\(j\)</span> for the same dataset. The standard deviation <span class="math inline">\(\sigma(\kappa_{ij})\)</span> is taken across all datasets, and the mean is calculated over the all deviation scores for tool <span class="math inline">\(i\)</span>, amounting to <span class="math inline">\({(J - 1)}\)</span> where <span class="math inline">\(J\)</span> is the total number of strategies. Since <span class="math inline">\(\kappa\)</span> ranges from <span class="math inline">\(-1\)</span> to <span class="math inline">\(1\)</span>, where <span class="math inline">\(1\)</span> indicates complete agreement and <span class="math inline">\(-1\)</span> indicates complete disagreement, deviation scores typically range on the lower end of <span class="math inline">\((0, 1)\)</span>. To standardize the similarity deviation score for the consistency equation, min-max scaling is applied across strategies, setting the highest mean deviation to <span class="math inline">\(1\)</span> and the lowest to <span class="math inline">\(0\)</span>.</p>
 <p><span class="math display">\[
-\text{damage deviation}_\text{ i} = \sigma\ \text{( stringency}_\text{ i })
-\]</span> taken across datasets and stringency refers to the proportion of cells marked as damaged by the strategy. To transform this value within [0, 1], we performed min-max scaling across all tools, j,</p>
-<p><span class="math display">\[
-\text{damage deviation}_\text{ i} = \frac{
-    \text{damage deviation}_\text{ i} - \min\left( \text{damage deviation}_\text{ j} \right)
-}{
-    \max\left( \text{damage deviation}_\text{ j} \right) - \min\left( \text{damage deviation}_\text{ j} \right)
-}
+\text{similarity deviation} = \frac{1}{J - 1} \sum_{j \neq i} \sigma(\kappa_{ij})
 \]</span></p>
-<p>Note that this was calculated for each dataset type = ground truth, non-ground truth, and simulated = to find a median damage deviation score for each strategy. This was done due to address the imbalance between dataset types.</p>
-<p>Similarily, <span class="math display">\[
-\text{similarity deviation}_\text{ i} = \text{median (} {\sigma_j(\kappa_{ij})} )
-\]</span> for a strategy, i, compared to each other strategy, j, and the median is found across strategies. Note that scaling was performed,</p>
+<p>More simply, <span class="math inline">\(\text{stringency deviation}\)</span> is taken as the standard deviation in the stringency score for a particular strategy, <span class="math inline">\(i\)</span>, across datasets, where stringency is the percentage of damaged cells detected by the strategy. And as with <span class="math inline">\(\text{similarity deviation}\)</span>, the <span class="math inline">\(\text{stringency deviation}\)</span> score is standardised by min-max scaling for the consistency equation, setting the highest deviation to <span class="math inline">\(1\)</span> and the lowest to <span class="math inline">\(0\)</span>.</p>
 <p><span class="math display">\[
-\text{similarity deviation}_\text{ i} = \frac{
-    \text{similarity deviation}_\text{ i} - \min\left( \text{similarity deviation}_\text{ j} \right)
-}{
-    \max\left( \text{similarity deviation}_\text{ j} \right) - \min\left( \text{similarity deviation}_\text{ j} \right)
-}
-\]</span> and the final similarity score found by taking the median across the three dataset types.</p>
+\text{stringency deviation} =  \sigma(\text{damaged cells / total cells})
+\]</span></p>
 <p><br></p>
+<p>Note, each component is measured across the dataset types in isolation before being combined in the form of a median to generate the final deviation score. i.e, <span class="math inline">\(\text{stringency deviation}\)</span> is the median of the score taken across the groundtruth, non-groundtruth, and simulated datasets. This is done to avoid imbalancing the consistency score with any one dataset type.</p>
+<p><br></p>
+<p>You can view the isolated consistency scores, <a href="consistency.html">here</a>.</p>
+<p><br> <br></p>
 </section>
 <section id="usability" class="level4">
 <h4 class="anchored" data-anchor-id="usability">Usability</h4>
-<p>This is a manual scoring of tool-based strategies according to 6 criteria,</p>
+<p>This is a manual and automated scoring of tool-based strategies according to 6 criteria,</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 70%">
+<col style="width: 50%">
+<col style="width: 19%">
 <col style="width: 7%">
 <col style="width: 8%">
 <col style="width: 13%">
@@ -476,50 +468,58 @@ window.Quarto = {
 <thead>
 <tr class="header">
 <th>Criterion</th>
+<th>Automated</th>
+<th></th>
 <th>No</th>
 <th>Yes</th>
-<th>Maximum</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Presence of documentation</td>
+<td></td>
 <td>0</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="even">
 <td>More than one code deployment</td>
+<td>✓</td>
 <td>0</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="odd">
 <td>Last adjustment to tool less than two years ago</td>
+<td>✓</td>
 <td>0</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="even">
 <td>Alterations to core code required</td>
+<td></td>
 <td>1</td>
 <td>0</td>
 <td>1</td>
 </tr>
 <tr class="odd">
 <td>GitHub stars<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+<td>✓</td>
 <td>0</td>
 <td>…</td>
 <td>5</td>
 </tr>
 <tr class="even">
 <td>Ease of use<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
+<td></td>
 <td>…</td>
 <td>…</td>
 <td>5</td>
 </tr>
 </tbody>
 </table>
+<p>You can view the isolated usability scores, <a href="usability.html">here</a>.</p>
 <p><br></p>
 <hr>
 <p>To add a new metric or suggest an adjustment to the above metrics, please visit the <a href="contribute.html">Contribute</a> page.</p>

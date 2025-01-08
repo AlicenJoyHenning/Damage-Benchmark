@@ -1,0 +1,125 @@
+---
+title: "Performance"
+toc: true
+toc-location: left
+toc-depth: 3
+format: 
+  html:
+    page-layout: full
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Explore the results below or [return to consensus](results.html).
+
+## Performance on ground truth datasets
+
+```{r, echo=FALSE}
+
+# Load necessary libraries
+library(DT)
+library(dplyr)
+library(purrr)
+
+# Read the results CSV file directly from GitHub
+groundtruth_data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/D_Summary_Results/groundtruth-performance.csv")
+
+# Return the table
+datatable(
+  groundtruth_data,
+  options = list(
+    paging = FALSE,
+    lengthChange = FALSE,
+    dom = 'Bfrtip',
+    buttons = c('colvis', 'csv', 'excel'),
+    columnDefs = list(
+      list(targets = c(0, 6, 7, 8, 9, 10, 11), visible = FALSE)
+    )
+  )
+) %>%
+  formatRound(
+    columns = c("precision", "tpr", "pr_auc", "precision_lower", "precision_upper", "tpr_lower", "tpr_upper", "pr_auc_lower", "pr_auc_upper", "prevalence"), 
+    digits = 2
+)
+
+
+```
+
+------------------------------------------------------------------------
+
+## Performance on simulated datasets
+
+### Similarity of highly variable genes to the positive control
+
+```{r, echo=FALSE}
+
+# Load necessary libraries
+library(DT)
+library(dplyr)
+library(purrr)
+
+# Read the results CSV file directly from GitHub
+HVG_data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/D_Summary_Results/HVG-Jaccard.csv")
+
+# Return the table
+datatable(
+  HVG_data,
+  options = list(
+    paging = FALSE,
+    lengthChange = FALSE,
+    dom = 'Bfrtip',
+    buttons = c('colvis', 'csv', 'excel'),
+    columnDefs = list(
+      list(targets = 1, visible = TRUE, width = "100px"),
+      list(targets = c(0, 3, 4, 5, 7, 8, 9, 11, 12, 13, 15, 16, 17, 19, 20), visible = FALSE)
+    )
+  )
+) %>%
+  formatRound(
+    columns = c("method", "median_2.5", "lowest_2.5", "highest_2.5", "median_proportion.2.5", "median_5", 
+                "lowest_5", "highest_5", "median_proportion.5", "median_10", "lowest_10", "highest_10",
+                "median_proportion.10", "median_15", "lowest_15", "highest_15", "median_proportion.15", 
+                "median_20", "lowest_20", "highest_20", "median_proportion"), 
+    digits = 2
+  )
+
+
+
+```
+
+### DEG correctness relative to the positive control
+
+```{r, echo=FALSE}
+
+# Load necessary libraries
+library(DT)
+library(dplyr)
+library(purrr)
+
+# Read the results CSV file directly from GitHub
+DEG_data <- read.csv("https://raw.githubusercontent.com/AlicenJoyHenning/DamageToolReviewArticle/refs/heads/main/data/D_Summary_Results/DEG-F1.csv")
+
+# Return the table
+datatable(
+  DEG_data,
+  options = list(
+    paging = FALSE,
+    lengthChange = FALSE,
+    dom = 'Bfrtip',
+    buttons = c('colvis', 'csv', 'excel'),
+    columnDefs = list(
+      list(targets = c(0, 3, 4, 6, 7, 9, 10, 12, 13, 15, 16), visible = FALSE)
+    )
+  )
+) %>%
+  formatRound(
+    columns = c("median_F1_2.5", "min_F1_2.5", "max_F1_2.5", "median_F1_5", "min_F1_5", "max_F1_5","median_F1_10", "min_F1_10", "max_F1_10",
+                "median_F1_15", "min_F1_15", "max_F1_15", "median_F1_20","min_F1_20","max_F1_20","median"), 
+    digits = 2
+)
+
+
+```
+
+------------------------------------------------------------------------
