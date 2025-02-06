@@ -142,8 +142,8 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="welcome-to-the-damage-control-headquarters" class="level1">
 <h1>Welcome to the <code>Damage Control</code> headquarters!</h1>
-<section id="webpage-tour" class="level2">
-<h2 class="anchored" data-anchor-id="webpage-tour">Webpage tour</h2>
+<section id="website-tour" class="level2">
+<h2 class="anchored" data-anchor-id="website-tour">Website tour</h2>
 <ul>
 <li><a href="benchmark.html">Benchmark</a> explore further descriptions of the benchmarking methods and metrics</li>
 <li><a href="data.html">Datasets</a> access the publicly available data used to perform the benchmark</li>
@@ -154,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="motivation-for-the-benchmark" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-for-the-benchmark">Motivation for the benchmark</h2>
 <p>Filtering cells that have lost transcriptomic information during isolation protocols, referred to here as “damaged cells”, is a fundamental quality control task for single cell RNA sequencing (scRNA-seq) data analysis. However, unlike other aspects of cell quality control, such as doublet and empty droplet removal, how to best filter damaged cells from single cell data has not been thoroughly explored.</p>
-<p>Searching online tutorials, forums, and published articles will bring you to the same conclusion: filter cells that express a high proportion of mitochondrial genes. This is because damaged cells are understood to have impaired membranes where cytoplasmic RNA content can escaped. It is for the same reason that the number of unique transcripts and UMIs per cell are also recommended metrics for identifying damaged cells.</p>
+<p>Searching online tutorials, forums, and published articles will bring you to the same conclusion: filter cells that express a high proportion of mitochondrial genes. This is because damaged cells are understood to have impaired membranes where cytoplasmic RNA content can escape. It is for the same reason that the number of unique transcripts and UMIs per cell are also recommended metrics for identifying damaged cells.</p>
 <p>More recently, the proportion of unspliced RNA, targeting transcripts that remain intact in the nucleus in the event of damage, and ribosomal RNA, targeting those that do not, are offered as damaged cell quality control metrics. Extending from this, the expression of the nuclear-located long non-coding RNA, MALAT1, has also been suggested as a potential metric for identifying damaged cells.</p>
 <p>The problem for a user then arises in two forms:<br> 1. Which cell quality controls metrics should I use and<br> 2. According to what outlier detection framework should I perform filtering?</p>
 <p>Damaged cell detection tools provide their own solutions to the problems. However, the relative effectiveness of these tools, and of manual methods, is yet to be systematically determined.</p>

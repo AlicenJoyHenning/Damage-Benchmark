@@ -67,4 +67,7 @@ ifnb <- UpdateSeuratObject(ifnb)
 
 These foundational simulated samples were altered by randomly extracting a fixed percentage of their cells (2.5, 5, 10, 15, or 20), passing them through a damage-pertubration function, and reintroducing them to the sample. The resulting datasets are available for download on ```Zenodo```, [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14048075.svg)](https://doi.org/10.5281/zenodo.14048075).
 
+
+Explore parameters for simulated data [here](simulation_parameters.html)
+
 <br>

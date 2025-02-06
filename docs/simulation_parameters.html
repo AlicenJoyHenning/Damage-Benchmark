@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Stringency – Damage Benchmark</title>
+<title>Simulation parameters – Damage Benchmark</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,22 +66,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="site_libs/datatables-binding-0.33/datatables.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="site_libs/jszip-1.13.6/jszip.min.js"></script>
-<link href="site_libs/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet">
-<script src="site_libs/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
-<script src="site_libs/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
-<script src="site_libs/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
-<script src="site_libs/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
-<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 </head>
@@ -155,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Stringency</h1>
+<h1 class="title">Simulation parameters</h1>
 </div>
 
 
@@ -172,17 +156,51 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Explore the current stringency results below or <a href="results.html">return to consensus</a>.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-585f9a169bc2a946b6bd" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-585f9a169bc2a946b6bd">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],["ddqc","DropletQC","ensembleKQC","miQC","SampleQC","scater","valiDrops","manual_fixed_mito","manual_adaptive_mito","manual_mito_ribo","manual_mito_ribo_library","manual_library","manual_malat1","manual_malat1_mito_ribo"],[7.32616996714324,0,34.7712418300654,28.9951638903815,11.3986928104575,1.97022276950633,2.65401540154015,51.1688668866887,6.11764705882353,5.56862745098039,1.03898410443122,10.1072607260726,9.581742296421281,0.694055748348819],[14.0459145889904,0.899031811894882,25.8064516129032,17.8469241773963,11.5280177733893,4.60824846223656,1.58458909429859,23.4620886981402,7.42159927397398,3.91146727723717,0.810250612398719,11.1076588472891,3.66038116365836,0.591490173630986],[16.8127734662312,0,30.6019730219448,8.54405320739524,9.75950294447154,7.06392486201693,1.64496230294722,14.4024697765325,4.10135922334019,0.705985305115243,0.0366099212886692,10.0023369946249,4.02612096886769,0.702120259089967],[14.0459145889904,0,30.6019730219448,17.8469241773963,11.3986928104575,4.60824846223656,1.64496230294722,23.4620886981402,6.11764705882353,3.91146727723717,0.810250612398719,10.1072607260726,4.02612096886769,0.694055748348819]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Strategy<\/th>\n      <th>Groundtruth<\/th>\n      <th>Non-groundtruth<\/th>\n      <th>Simulated<\/th>\n      <th>Median<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"paging":false,"lengthChange":false,"dom":"Bfrtip","buttons":["colvis","csv","excel"],"columnDefs":[{"targets":2,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":3,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":4,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":5,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":0,"visible":false},{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"strategy","targets":1},{"name":"median_groundtruth","targets":2},{"name":"median_non_groundtruth","targets":3},{"name":"median_simulated","targets":4},{"name":"stringency","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.columnDefs.3.render"],"jsHooks":[]}</script>
-</div>
-</div>
-<p>To view the stringency scores for each of the 51 datasets, access <a href="https://github.com/AlicenJoyHenning/DamageToolReviewArticle/blob/main/data/D_Summary_Results/proportion-damaged.csv">here</a></p>
-<hr>
+<p>#| echo: false #| warning: false #| message: false library(ggplot2) library(patchwork) library(manipulateWidget)</p>
+<section id="function-to-generate-plots" class="level1">
+<h1>Function to generate plots</h1>
+<p>generate_plots &lt;- function(damaged_cell_number, beta_proportion, a1, b1, a2, b2) { high_count &lt;- round(damaged_cell_number * beta_proportion) low_count &lt;- damaged_cell_number - high_count</p>
+<pre><code>low_scaling &lt;- rbeta(low_count, shape1 = a1, shape2 = b1)  
+high_scaling &lt;- rbeta(high_count, shape1 = a2, shape2 = b2)  
+damage_levels &lt;- c(low_scaling, high_scaling)
+reduction_levels &lt;- (1 - damage_levels)
+perturb_damage_factors &lt;- exp(damage_levels^2) 
+perturb_reduction_factors &lt;- exp(reduction_levels^2)
+
+damage_df &lt;- data.frame(damage_levels)
+reduction_df &lt;- data.frame(reduction_levels)
+perturb_damage_df &lt;- data.frame(perturb_damage_factors)
+perturb_reduction_df &lt;- data.frame(perturb_reduction_factors)
+
+damage &lt;- ggplot(damage_df, aes(x = damage_levels)) + 
+    geom_histogram(bins = 30) + 
+    ggtitle("Damage Levels") + 
+    theme(plot.title = element_text(face = "bold", hjust = 0.5))
+
+perturb_damage &lt;- ggplot(perturb_damage_df, aes(x = perturb_damage_factors)) + 
+    geom_histogram(bins = 30) + 
+    ggtitle("Perturb Damage Factors") +  
+    theme(plot.title = element_text(face = "bold", hjust = 0.5))
+
+reduction &lt;- ggplot(reduction_df, aes(x = reduction_levels)) +  
+    geom_histogram(bins = 30) + 
+    ggtitle("Reduction Levels") + 
+    theme(plot.title = element_text(face = "bold", hjust = 0.5))
+
+perturb_reduction &lt;- ggplot(perturb_reduction_df, aes(x = perturb_reduction_factors)) +
+    geom_histogram(bins = 30) + 
+    ggtitle("Perturb Reduction Factors") +  
+    theme(plot.title = element_text(face = "bold", hjust = 0.5))
+
+(damage | perturb_damage) / (reduction | perturb_reduction)</code></pre>
+<p>}</p>
+</section>
+<section id="use-manipulatewidget-to-create-interactive-controls" class="level1">
+<h1>Use manipulateWidget to create interactive controls</h1>
+<p>manipulateWidget( generate_plots(damaged_cell_number, beta_proportion, a1, b1, a2, b2), damaged_cell_number = mwSlider(100, 10000, 10000, step = 100, label = “Number of Damaged Cells”), beta_proportion = mwSlider(0, 1, 0.9, step = 0.01, label = “Beta Proportion”), a1 = mwNumeric(3, label = “Shape a1”), b1 = mwNumeric(12, label = “Shape b1”), a2 = mwNumeric(12, label = “Shape a2”), b2 = mwNumeric(3, label = “Shape b2”) )</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
