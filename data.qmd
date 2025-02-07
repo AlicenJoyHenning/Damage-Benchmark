@@ -58,7 +58,6 @@ _1 parent dataset, 30 final samples_
 All simulated samples were created from a dataset available in ```R``` through the ```SeuratData``` package. The interferon-treated PBMC dataset was selected as it contains case and control data already intergrated into a single object with cell annotations. 
 
 ```R
-# IFNB-Stimulated & Control PBMC data
 library(SeuratData)
 InstallData("ifnb")
 data("ifnb")

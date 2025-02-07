@@ -12,59 +12,75 @@ editor:
 #| echo: false
 #| warning: false
 #| message: false
+install.packages("manipulateWidget")
+install.packages("ggplot2")
+install.packages("patchwork")
+library(manipulateWidget)
+library(shiny)
 library(ggplot2)
 library(patchwork)
-library(manipulateWidget)
 
-# Function to generate plots
-generate_plots <- function(damaged_cell_number, beta_proportion, a1, b1, a2, b2) {
-    high_count <- round(damaged_cell_number * beta_proportion)
-    low_count <- damaged_cell_number - high_count  
+ui <- fluidPage(
+    titlePanel("Damage Distribution Explorer"),
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput("damaged_cell_number", "Number of Damaged Cells:", 
+                        min = 100, max = 10000, value = 10000, step = 100),
+            sliderInput("beta_proportion", "Beta Proportion:", 
+                        min = 0, max = 1, value = 0.9, step = 0.01),
+            numericInput("a1", "Shape a1:", value = 3, min = 1),
+            numericInput("b1", "Shape b1:", value = 12, min = 1),
+            numericInput("a2", "Shape a2:", value = 12, min = 1),
+            numericInput("b2", "Shape b2:", value = 3, min = 1)
+        ),
+        mainPanel(
+            plotOutput("damagePlot")
+        )
+    )
+)
 
-    low_scaling <- rbeta(low_count, shape1 = a1, shape2 = b1)  
-    high_scaling <- rbeta(high_count, shape1 = a2, shape2 = b2)  
-    damage_levels <- c(low_scaling, high_scaling)
-    reduction_levels <- (1 - damage_levels)
-    perturb_damage_factors <- exp(damage_levels^2) 
-    perturb_reduction_factors <- exp(reduction_levels^2)
+server <- function(input, output) {
+    output$damagePlot <- renderPlot({
+        high_count <- round(input$damaged_cell_number * input$beta_proportion)
+        low_count <- input$damaged_cell_number - high_count  
 
-    damage_df <- data.frame(damage_levels)
-    reduction_df <- data.frame(reduction_levels)
-    perturb_damage_df <- data.frame(perturb_damage_factors)
-    perturb_reduction_df <- data.frame(perturb_reduction_factors)
+        low_scaling <- rbeta(low_count, shape1 = input$a1, shape2 = input$b1)  
+        high_scaling <- rbeta(high_count, shape1 = input$a2, shape2 = input$b2)  
+        damage_levels <- c(low_scaling, high_scaling)
+        reduction_levels <- (1 - damage_levels)
+        perturb_damage_factors <- exp(damage_levels^2) 
+        perturb_reduction_factors <- exp(reduction_levels^2)
 
-    damage <- ggplot(damage_df, aes(x = damage_levels)) + 
-        geom_histogram(bins = 30) + 
-        ggtitle("Damage Levels") + 
-        theme(plot.title = element_text(face = "bold", hjust = 0.5))
+        damage_df <- data.frame(damage_levels)
+        reduction_df <- data.frame(reduction_levels)
+        perturb_damage_df <- data.frame(perturb_damage_factors)
+        perturb_reduction_df <- data.frame(perturb_reduction_factors)
 
-    perturb_damage <- ggplot(perturb_damage_df, aes(x = perturb_damage_factors)) + 
-        geom_histogram(bins = 30) + 
-        ggtitle("Perturb Damage Factors") +  
-        theme(plot.title = element_text(face = "bold", hjust = 0.5))
+        damage <- ggplot(damage_df, aes(x = damage_levels)) + 
+            geom_histogram(bins = 30) + 
+            ggtitle("Damage Levels") + 
+            theme(plot.title = element_text(face = "bold", hjust = 0.5))
 
-    reduction <- ggplot(reduction_df, aes(x = reduction_levels)) +  
-        geom_histogram(bins = 30) + 
-        ggtitle("Reduction Levels") + 
-        theme(plot.title = element_text(face = "bold", hjust = 0.5))
+        perturb_damage <- ggplot(perturb_damage_df, aes(x = perturb_damage_factors)) + 
+            geom_histogram(bins = 30) + 
+            ggtitle("Perturb Damage Factors") +  # Fixed title
+            theme(plot.title = element_text(face = "bold", hjust = 0.5))
 
-    perturb_reduction <- ggplot(perturb_reduction_df, aes(x = perturb_reduction_factors)) +
-        geom_histogram(bins = 30) + 
-        ggtitle("Perturb Reduction Factors") +  
-        theme(plot.title = element_text(face = "bold", hjust = 0.5))
-    
-    (damage | perturb_damage) / (reduction | perturb_reduction)
+        reduction <- ggplot(reduction_df, aes(x = reduction_levels)) +  # Fixed data reference
+            geom_histogram(bins = 30) + 
+            ggtitle("Reduction Levels") + 
+            theme(plot.title = element_text(face = "bold", hjust = 0.5))
+
+        perturb_reduction <- ggplot(perturb_reduction_df, aes(x = perturb_reduction_factors)) +
+            geom_histogram(bins = 30) + 
+            ggtitle("Perturb Reduction Factors") +  # Fixed title
+            theme(plot.title = element_text(face = "bold", hjust = 0.5))
+        
+        (damage | perturb_damage) / (reduction | perturb_reduction)
+    })
 }
 
-# Use manipulateWidget to create interactive controls
-manipulateWidget(
-    generate_plots(damaged_cell_number, beta_proportion, a1, b1, a2, b2),
-    damaged_cell_number = mwSlider(100, 10000, 10000, step = 100, label = "Number of Damaged Cells"),
-    beta_proportion = mwSlider(0, 1, 0.9, step = 0.01, label = "Beta Proportion"),
-    a1 = mwNumeric(3, label = "Shape a1"),
-    b1 = mwNumeric(12, label = "Shape b1"),
-    a2 = mwNumeric(12, label = "Shape a2"),
-    b2 = mwNumeric(3, label = "Shape b2")
-)
+shinyApp(ui, server)
+```
 
 
